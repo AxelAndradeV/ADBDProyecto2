@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-10-2022 a las 02:00:29
+-- Tiempo de generación: 30-10-2022 a las 02:09:11
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.1
 
@@ -158,6 +158,14 @@ CREATE TABLE `tbtipousuario` (
   `tipodescripcion` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `tbtipousuario`
+--
+
+INSERT INTO `tbtipousuario` (`tipoid`, `tipodescripcion`) VALUES
+(1, 'Administrador'),
+(2, 'Empleado');
+
 -- --------------------------------------------------------
 
 --
@@ -172,6 +180,13 @@ CREATE TABLE `tbusuario` (
   `usuariopassword` varchar(255) NOT NULL,
   `tipoid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `tbusuario`
+--
+
+INSERT INTO `tbusuario` (`usuarioid`, `usuarionombre`, `usuariotelefono`, `usuariocorreo`, `usuariopassword`, `tipoid`) VALUES
+(1, 'Administrador', 88888888, 'admin@gmail.com', '12345', 1);
 
 -- --------------------------------------------------------
 
@@ -246,6 +261,12 @@ ALTER TABLE `tbusuarioorden`
 --
 ALTER TABLE `tbhistorialproducto`
   MODIFY `historialid` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tbusuarioorden`
+--
+ALTER TABLE `tbusuarioorden`
+  MODIFY `usuarioordenid` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
