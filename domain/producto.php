@@ -6,13 +6,15 @@
         private $productoprecio;
         private $productoestado;
         private $productocategoria;
+        private $productocodigo;
 
-        public function __construct($id, $nombre,$precio,$estado,$categoria){
+        public function __construct($id, $nombre,$precio,$estado,$categoria,$codigo){
             $this->productoid = $id;
             $this->productonombre = $nombre;
             $this->productoprecio = $precio;
             $this->productoestado = $estado;
             $this->productocategoria = $categoria;
+            $this->productocodigo = $codigo;
         }
 
         function setIdProducto($id){
@@ -43,7 +45,27 @@
             $this->productoestado = $estado;
         }
 
+    
+    /**
+     * @return mixed
+     */
+    public function getProductocodigo()
+    {
+        return $this->productocodigo;
     }
+
+    /**
+     * @param mixed $productocodigo
+     *
+     * @return self
+     */
+    public function setProductocodigo($productocodigo)
+    {
+        $this->productocodigo = $productocodigo;
+
+        return $this;
+    }
+}
 
 
 ?>

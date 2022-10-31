@@ -316,7 +316,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
   </div>
 
 </div>
-    </div>
+  </div>
 
 </div>
 
@@ -387,8 +387,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
   </div>
 
 </div>
-    </div>
-
+</div>
 </div>
 
 <!-- ./wrapper -->

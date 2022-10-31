@@ -1,6 +1,11 @@
 <?php
     include_once 'data.php';
-	include '../../domain/producto.php';
+    if (is_file("../domain/producto.php")){
+        include ("../domain/producto.php");
+    }else{
+        include ("../../domain/producto.php");
+    }
+	//include '../../domain/producto.php';
 
 	class ProductoData extends Database{
 
@@ -17,9 +22,9 @@
 
         public function getPaginasProducto($inicio, $cantidad){
             $pdo = Database::conectar();
-            $stm = $pdo->prepare("SELECT * FROM tbproducto LIMIT :inicio, :cantidad");
-            $stm ->bindParam(':inicio',$inicio,PDO::PARAM_INT);
-            $stm ->bindParam(':cantidad',$cantidad,PDO::PARAM_INT);
+            $stm = $pdo->prepare("CALL obtenerPaginasProducto(?,?)");
+            $stm ->bindParam(1,$inicio,PDO::PARAM_INT);
+            $stm ->bindParam(2,$cantidad,PDO::PARAM_INT);
             $stm->execute();
             Database::desconectar();
             return $stm->fetchAll(PDO::FETCH_ASSOC);

@@ -1,6 +1,12 @@
 <?php 
 
-include '../../data/productodata.php';
+if (is_file("../data/productodata.php")){
+        include ("../data/productodata.php");
+    }else{
+        include ("../../data/productodata.php");
+    }
+
+//include '../../data/productodata.php';
 
 class ProductoBusiness{
 
