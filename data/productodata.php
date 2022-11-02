@@ -58,8 +58,10 @@
             $productoimagen = $producto->getImagen();
             $stm ->bindParam(1,$nextId,PDO::PARAM_INT);
             $stm ->bindParam(2,$productonombre,PDO::PARAM_STR);
-            $stm ->bindParam(3,$productoimagen,PDO::PARAM_STR);
-            $stm ->bindParam(4,$productocodigo,PDO::PARAM_INT);
+            $stm ->bindParam(2,$productoprecio,PDO::PARAM_STR);
+            $stm ->bindParam(2,$productoestado,PDO::PARAM_STR);
+            $stm ->bindParam(3,$productocodigo,PDO::PARAM_STR);
+            $stm ->bindParam(4,$productoimagen,PDO::PARAM_INT);
             $resultado = $stm->execute();
             Database::desconectar();
 	           

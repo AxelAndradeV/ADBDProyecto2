@@ -1,8 +1,11 @@
 <?php 
   
   include '../../business/productobusiness.php';
+  include '../../business/categoriabusiness.php';
   $productoBusiness = new ProductoBusiness();
   $productos = $productoBusiness->getAllTBProductos();
+  $categoriabusiness = new Categoriabusiness();
+  $categorias = $categoriabusiness->getAllTBCategorias();
 
   //var_dump($productos);
 
@@ -225,10 +228,10 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                           echo '<td>'.$producto['productonombre'].'</td>';
                           echo '<td>'.$producto['productoprecio'].'</td>';
                           echo '<td>'.$producto['productoestado'].'</td>';
-                          echo '<td>'.$producto['productocategoria'].'</td>';
+                          echo '<td>'.$producto['productocategoriaid'].'</td>';
                           echo '<td>'.$producto['productocodigo'].'</td>';
                           echo '<td>';
-                          echo "<div class='btn-group'><button class='btn btn-warning btnEditarProducto' productoid='".$producto["productoid"]."' nombre='".$producto['productonombre']."' precio='".$producto['productoprecio']."' estado='".$producto['productoestado']."' imagen='".$producto["productoimg"]."' data-toggle='modal' data-target='#modalEditarProducto'><i class='fa fa-pencil-alt'></i></button><button class='btn btn-danger btnEliminarProducto' productoid='".$producto["productoid"]."' imagen='".$producto["productoimg"]."'><i class='fa fa-times'></i></button></div>";
+                          echo "<div class='btn-group'><button class='btn btn-warning btnEditarProducto' productoid='".$producto["productoid"]."' nombre='".$producto['productonombre']."' precio='".$producto['productoprecio']."' estado='".$producto['productoestado']."' categoria='".$producto['productocategoriaid']."' codigo='".$producto["productocodigo"]."' data-toggle='modal' data-target='#modalEditarProducto'><i class='fa fa-pencil-alt'></i></button><button class='btn btn-danger btnEliminarProducto' productoid='".$producto["productoid"]."' imagen='".$producto["productoimg"]."'><i class='fa fa-times'></i></button></div>";
                           echo '</td>';
                           echo '</tr>';
                         }
@@ -290,11 +293,14 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
               </div>
 
               <div class="form-group">
-                
+                <label >Estado: </label>
+                <input type="text" class="form-control" name="productoestado" id="productoestado" placeholder="Ingrese el eatado">
+              </div>
 
-                <td><label for="categoria"> Seleccione la categoría</label></td>
+              <div class="form-group">
+              <td><label for="servicio"> Seleccione la categoría</label></td>
                           <td><select name="categoriaid" id="categoriaid">
-                            <option value="">Categorías disponibles</option>
+                            <option value="">categorías disponibles</option>
                               <?php
                                 if(count($categorias) > 0){
                                   foreach($categorias as $categoria){
@@ -304,6 +310,16 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                               ?>	
 					
 			                  	</select></td>
+
+                          <div class="form-group">
+                            <label >Código: </label>
+                            <input type="text" class="form-control" name="productocodigo" id="productocodigo" placeholder="Ingrese el codigo">
+                          </div>
+
+
+              <div class="form-group">
+                
+
               </div>
 
 
