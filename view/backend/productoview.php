@@ -265,7 +265,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
     <div class="modal-content">
 
         <div class="modal-header">
-          <h4 class="modal-title">Agregar producto</h4>
+          <h4 class="modal-title">Agregars producto</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -385,12 +385,17 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
               </div>
 
               <div class="form-group">
-                <label >Categoría: </label>
-                <select class="form-control input-lg"  name="productocategoria" id="productocategoria" required>
-                  
-                  <option>Cargar desde la base de datos</option>
-
-                </select>
+              <?php
+              echo '<td><select name="categoriaid" id="categoriaid" >';
+                            foreach($categorias as $categoria){
+                              if($row-> getId() == $categoria->getId() ){
+                                echo '<option selected value="'.$categoria->getId().'">'.$categoria->getDescripcion().'</option>'; 
+                              }else{
+                                echo '<option value="'.$categoria->getId().'">'.$categoria->getDescripcion().'</option>'; 
+                              }
+                            }
+                            echo ' </select></td>';
+                            ?>
               </div>
 
 
