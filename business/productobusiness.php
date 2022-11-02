@@ -23,6 +23,13 @@ class ProductoBusiness{
     public function getPaginasProducto($inicio, $cantidad){
     	return $this->productoData->getPaginasProducto($inicio, $cantidad);
     }
+    
+    public function modificarProducto($producto){
+        return $this->productoData->modificarProducto($producto);
+    }
+    public function eliminarProducto($id){
+        return $this->productoData->eliminarProducto($id);
+    }
 
     public function getAllTBProductos(){
         return $this->productoData->getAllTBProductos();

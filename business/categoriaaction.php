@@ -68,6 +68,7 @@
 			
 
 
+			
 		}
 	}else if(isset($_POST['actualizar'])){
 		if(isset($_POST['categoriadescripcion']) && isset($_POST['categoriaid'])){

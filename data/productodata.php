@@ -39,5 +39,32 @@
             return $stm->fetchAll(PDO::FETCH_ASSOC);
          }
 
+         public function insertarProducto($producto){
+			$pdo = Database::conectar();
+            $stm = $pdo->prepare("CALL insertarProducto(?,?,?,?,?,?)");
+
+            $max = $pdo ->prepare("SELECT MAX(productoid) AS productoid  FROM tbproducto");
+	        $max -> execute();
+	        $nextId = 1;
+	                
+	        if($row = $max->fetch()){
+	           $nextId = $row[0]+1;
+	        }
+	        $productonombre = $producto->getNombreProducto();
+	        $productoprecio = $producto->getPrecioProducto();
+	        $productoestado = $producto->getEstadoProducto();
+            $productocategoria = $producto->getCategoria();
+            $productocodigo = $producto->getProductocodigo();
+            $productoimagen = $producto->getImagen();
+            $stm ->bindParam(1,$nextId,PDO::PARAM_INT);
+            $stm ->bindParam(2,$productonombre,PDO::PARAM_STR);
+            $stm ->bindParam(3,$productoimagen,PDO::PARAM_STR);
+            $stm ->bindParam(4,$productocodigo,PDO::PARAM_INT);
+            $resultado = $stm->execute();
+            Database::desconectar();
+	           
+	        return $resultado;
+		}
+
     }
 ?>

@@ -7,14 +7,16 @@
         private $productoestado;
         private $productocategoria;
         private $productocodigo;
+        private $productoimagen;
 
-        public function __construct($id, $nombre,$precio,$estado,$categoria,$codigo){
+        public function __construct($id, $nombre,$precio,$estado,$categoria,$codigo,$imagen){
             $this->productoid = $id;
             $this->productonombre = $nombre;
             $this->productoprecio = $precio;
             $this->productoestado = $estado;
             $this->productocategoria = $categoria;
             $this->productocodigo = $codigo;
+            $this->productoimagen = $imagen;
         }
 
         function setIdProducto($id){
@@ -43,6 +45,26 @@
 
         function setEstadoProducto($estado){
             $this->productoestado = $estado;
+        }
+
+        function getEstadoProducto(){
+            return $this->productoestado;
+        }
+
+        function setCategoriaProducto($categoria){
+            $this->productocategoria = $categoria;
+        }
+
+        function getCategoriaProducto(){
+            return $this->productocategoria;
+        }
+
+        function setImagenProducto($imagen){
+            $this->productoimagen = $imagen;
+        }
+
+        function getImagenProducto(){
+            return $this->productoimagen;
         }
 
     

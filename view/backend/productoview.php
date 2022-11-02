@@ -206,12 +206,14 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example2" class="tabla-productos table table-bordered table-hover">
+                <table id="productos" class="tabla-productos table table-bordered table-hover">
                   <thead>
                   <tr>
                     <th>Nombre</th>
                     <th>Precio</th>
                     <th>Estado</th>
+                    <th>Categoría</th>
+                    <th>Código</th>
                     <th>Acciones</th>
                     
                   </tr>
@@ -223,6 +225,8 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                           echo '<td>'.$producto['productonombre'].'</td>';
                           echo '<td>'.$producto['productoprecio'].'</td>';
                           echo '<td>'.$producto['productoestado'].'</td>';
+                          echo '<td>'.$producto['productocategoria'].'</td>';
+                          echo '<td>'.$producto['productocodigo'].'</td>';
                           echo '<td>';
                           echo "<div class='btn-group'><button class='btn btn-warning btnEditarProducto' productoid='".$producto["productoid"]."' nombre='".$producto['productonombre']."' precio='".$producto['productoprecio']."' estado='".$producto['productoestado']."' imagen='".$producto["productoimg"]."' data-toggle='modal' data-target='#modalEditarProducto'><i class='fa fa-pencil-alt'></i></button><button class='btn btn-danger btnEliminarProducto' productoid='".$producto["productoid"]."' imagen='".$producto["productoimg"]."'><i class='fa fa-times'></i></button></div>";
                           echo '</td>';
@@ -286,12 +290,20 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
               </div>
 
               <div class="form-group">
-                <label >Categoría: </label>
-                <select class="form-control input-lg"  name="productocategoria" id="productocategoria" required>
-                  
-                  <option>Cargar desde la base de datos</option>
+                
 
-                </select>
+                <td><label for="categoria"> Seleccione la categoría</label></td>
+                          <td><select name="categoriaid" id="categoriaid">
+                            <option value="">Categorías disponibles</option>
+                              <?php
+                                if(count($categorias) > 0){
+                                  foreach($categorias as $categoria){
+                                    echo '<option value="'.$categoria->getId().'">'.$categoria->getDescripcion().'</option>';
+                                  }
+                                }
+                              ?>	
+					
+			                  	</select></td>
               </div>
 
 
