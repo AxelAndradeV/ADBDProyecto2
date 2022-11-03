@@ -1,7 +1,16 @@
 <?php
     include_once 'data.php';
-	include '../domain/orden.php';
-	include '../domain/detalle.php';
+
+    if (is_file("../domain/orden.php") && is_file("../domain/detalle.php") ){
+      	include ("../domain/orden.php");
+      	include ("../domain/detalle.php");
+    }else{
+    	include ("../../domain/orden.php");
+    	include ("../../domain/detalle.php");
+    }
+
+	//include '../domain/orden.php';
+	//include '../domain/detalle.php';
 
 	class OrdenData extends Database{
 
@@ -14,8 +23,8 @@
 	        $stmt -> execute();
 	        $nextId = 1;
 	                
-	        if($row = $stmt->fetch()){
-	           $nextId = $row[0]+1;
+	        if($row = $stmt->fetch()){ 
+	           $nextId = $row[0];
 	        }
 
 	        return $nextId;
@@ -32,18 +41,43 @@
 	        if($row = $stmt->fetch()){
 	           $nextId = $row[0]+1;
 	        }
+	        $cliente = $orden->getClienteOrden();
+	        $telefono = $orden->getTelefonoOrden();
+	        $correo = $orden->getCorreoOrden();
+	        $metodo = $orden->getMetodoOrden();
+	        $fecha = $orden->getFechaOrden();
+	        $total = $orden->getTotalOrden();
+	        $estado = $orden->getEstadoOrden();
 
 	        
-	        $insertar = "INSERT INTO `tborden`(`ordenid`, `ordenclientenombre`, `ordenclientetelefono`, `ordenclientecorreo`, `ordenmetodo`, `ordenfecha`, `ordentotal`, `ordenestado`) VALUES (?,?,?,?,?,?,?,?)";
+	        $insertar = "CALL insertarOrden (?,?,?,?,?,?,?,?)";
 	        $q = $pdo->prepare($insertar);
-	        $result = $q->execute(array($nextId, $orden->getClienteOrden(),$orden->getTelefonoOrden(),$orden->getCorreoOrden(),$orden->getMetodoOrden(),$orden->getFechaOrden(),$orden->getTotalOrden(),$orden->getEstadoOrden()
-
-	        ));
-
-	        Database::desconectar();
+	        $q ->bindParam(1,$nextId,PDO::PARAM_INT);
+	        $q ->bindParam(2,$cliente,PDO::PARAM_STR);
+	        $q ->bindParam(3,$telefono,PDO::PARAM_INT);
+	        $q ->bindParam(4,$correo,PDO::PARAM_STR);
+	        $q ->bindParam(5,$metodo,PDO::PARAM_INT);
+	        $q ->bindParam(6,$fecha,PDO::PARAM_STR);
+	        $q ->bindParam(7,$total,PDO::PARAM_INT);
+	        $q ->bindParam(8,$estado,PDO::PARAM_INT);
+			
+			$resultado = $q->execute();
+            Database::desconectar();
 	           
-	        return $result;
+	        return $resultado;
     	}
+
+    	public function modificarOrden($ordenid,$ordenestado){
+			$pdo = Database::conectar();
+            $stm = $pdo->prepare("CALL actualizarEstadoOrden(?,?)");
+           
+            $stm ->bindParam(1,$ordenid,PDO::PARAM_INT);          
+            $stm ->bindParam(2,$ordenestado,PDO::PARAM_INT); 
+            $resultado = $stm->execute();
+            Database::desconectar();
+	           
+	        return $resultado;
+		}
 
 
     	public function insertarTBDetalle($detalle) {
@@ -58,27 +92,53 @@
 	           $nextId = $row[0]+1;
 	        }
 
-	        $insertar = "INSERT INTO `tbdetalle`(`detalleid`, `detalleordenid`, `detalleproductoid`, `detalleprecio`, `detallecantidad`) VALUES (?,?,?,?,?)";
+	        $insertar = "CALL insertarDetalle (?,?,?,?,?)";
+	        $ordenid = $detalle->getOrdenId();
+	        $productoid = $detalle->getProductoId();
+	        $precio = $detalle->getPrecio();
+	        $cantidad = $detalle->getCantidad();
+
 	        $q = $pdo->prepare($insertar);
-	        $result = $q->execute(array($nextId, 
-	        	$detalle->getOrdenId(),
-	        	$detalle->getProductoId(),
-	        	$detalle->getPrecio(),
-	        	$detalle->getCantidad()
-	        ));
+	        $q ->bindParam(1,$nextId,PDO::PARAM_INT);
+	        $q ->bindParam(2,$ordenid,PDO::PARAM_INT);
+	        $q ->bindParam(3,$productoid,PDO::PARAM_INT);
+	        $q ->bindParam(4,$precio,PDO::PARAM_INT);
+	        $q ->bindParam(5,$cantidad,PDO::PARAM_INT);
+
+	        $resultado = $q->execute();
 
 	        Database::desconectar();
 	           
-	        return $result;
+	        return $resultado;
     	}
 
         public function getAllTBOrdenes() {
             $pdo = Database::conectar();
-            $stm = $pdo->prepare("SELECT * FROM tborden");
+            $stm = $pdo->prepare("CALL obtenerOrdenes()");
             $stm->execute();
             Database::desconectar();
             return $stm->fetchAll(PDO::FETCH_ASSOC);
          }
+
+         public function getAllTBDetalles($ordenid) {
+            $pdo = Database::conectar();
+            $stm = $pdo->prepare("CALL obtenerDetallesOrden(?)");
+            $stm->bindParam(1,$ordenid ,PDO::PARAM_INT);
+            $stm->execute();
+            Database::desconectar();
+            return $stm->fetchAll(PDO::FETCH_ASSOC);
+         }
+
+         public function eliminarOrden($id){
+			$pdo = Database::conectar();
+            $stm = $pdo->prepare("CALL eliminarOrden(?)");
+            $stm ->bindParam(1,$id,PDO::PARAM_INT);
+            $resultado = $stm->execute();
+            Database::desconectar();
+	           
+	        return $resultado;
+
+		}
 
     }
 ?>
