@@ -6,7 +6,7 @@
   $ordenes = $ordenBusiness->getAllTBOrdenes();
   $detalles = $ordenBusiness->getAllTBDetalles(11);
 
-  echo json_encode($detalles);
+  //echo json_encode($detalles);
   //print_r($detalles);
   //print_r($ordenes);
 
