@@ -63,7 +63,7 @@
     <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
   </div> -->
 
-  <!-- Navbar -->
+  <!-- Navbar --> 
   <?php include 'template/header.php' ?>
   <!-- /.navbar -->
 
@@ -464,7 +464,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 <script>
   $(function () {
 
-    $('#example2').DataTable({
+    $('#categorias').DataTable({
        "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
         },

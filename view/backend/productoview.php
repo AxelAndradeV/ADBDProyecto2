@@ -180,13 +180,13 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Producto</h1>
+            <h1 class="m-0">Productos</h1>
           </div><!-- /.col -->
          
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-    <!-- /.content-header -->
+    <!-- /.content-header --> 
 
     <!-- Main content -->
     <section class="content">
@@ -226,9 +226,13 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                         foreach($productos as $producto){
                           echo '<tr>';
                           echo '<td>'.$producto['productonombre'].'</td>';
+                          
                           echo '<td>'.$producto['productoprecio'].'</td>';
+                          
                           echo '<td>'.$producto['productoestado'].'</td>';
+                          
                           echo '<td>'.$producto['productocategoriaid'].'</td>';
+                          
                           echo '<td>'.$producto['productocodigo'].'</td>';
                           echo '<td>';
                           echo "<div class='btn-group'><button class='btn btn-warning btnEditarProducto' productoid='".$producto["productoid"]."' nombre='".$producto['productonombre']."' precio='".$producto['productoprecio']."' estado='".$producto['productoestado']."' categoria='".$producto['productocategoriaid']."' codigo='".$producto["productocodigo"]."' data-toggle='modal' data-target='#modalEditarProducto'><i class='fa fa-pencil-alt'></i></button><button class='btn btn-danger btnEliminarProducto' productoid='".$producto["productoid"]."' imagen='".$producto["productoimg"]."'><i class='fa fa-times'></i></button></div>";
@@ -298,18 +302,10 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
               </div>
 
               <div class="form-group">
-              <td><label for="servicio"> Seleccione la categoría</label></td>
-                          <td><select name="categoriaid" id="categoriaid">
-                            <option value="">categorías disponibles</option>
-                              <?php
-                                if(count($categorias) > 0){
-                                  foreach($categorias as $categoria){
-                                    echo '<option value="'.$categoria->getId().'">'.$categoria->getDescripcion().'</option>';
-                                  }
-                                }
-                              ?>	
-					
-			                  	</select></td>
+                <label >Categoria:</label>
+                <input type="text" class="form-control" name="productocategoriaid" id="productocategoriaid" placeholder="Ingrese categoria">
+               
+              </div>
 
                           <div class="form-group">
                             <label >Código: </label>
@@ -330,7 +326,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 
                 <p class="help-block">Peso máximo de la imagen 2MB</p>
 
-                <img src="vistas/img/productos/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
+                <img src="img/productos/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
 
               <input type="hidden" name="imagenActual" id="imagenActual">
 
@@ -385,17 +381,8 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
               </div>
 
               <div class="form-group">
-              <?php
-              echo '<td><select name="categoriaid" id="categoriaid" >';
-                            foreach($categorias as $categoria){
-                              if($row-> getId() == $categoria->getId() ){
-                                echo '<option selected value="'.$categoria->getId().'">'.$categoria->getDescripcion().'</option>'; 
-                              }else{
-                                echo '<option value="'.$categoria->getId().'">'.$categoria->getDescripcion().'</option>'; 
-                              }
-                            }
-                            echo ' </select></td>';
-                            ?>
+                <label >Categoria: </label>
+                <input type="text" class="form-control" name="productocategoriaid" id="productocategoriaid" placeholder="Ingrese categoria">
               </div>
 
 
@@ -473,12 +460,8 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <script>
   $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
+  
+    $('.tabla-productos').DataTable({
        "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
         },
@@ -496,17 +479,18 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 <script>
   $(".tabla-productos tbody").on("click", "button.btnEditarProducto", function(){
 
-    var idProducto = $(this).attr("productoid");
-    var nombre = $(this).attr("nombre");
-    var precio = $(this).attr("precio");
-    var estado = $(this).attr("estado");
-    var img = $(this).attr("imagen");
-    alert(img);
-    $("#productoid").val(idProducto);
-    $("#productonombre").val(nombre);
-    $("#productoprecio").val(precio);
-    $("#imagenActual").val(img);
-    $(".previsualizar").attr("src", img);
+    alert(20);
+    // var idProducto = $(this).attr("productoid");
+    // var nombre = $(this).attr("nombre");
+    // var precio = $(this).attr("precio");
+    // var estado = $(this).attr("estado");
+    // var img = $(this).attr("imagen");
+    // alert(img);
+    // $("#productoid").val(idProducto);
+    // $("#productonombre").val(nombre);
+    // $("#productoprecio").val(precio);
+    // $("#imagenActual").val(img);
+    // $(".previsualizar").attr("src", img);
   
 
 });
