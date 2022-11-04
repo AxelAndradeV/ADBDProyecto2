@@ -131,7 +131,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
           </li>
          
           <li class="nav-item">
-            <a href=".usuarioview.php" class="nav-link">
+            <a href="usuarioview.php" class="nav-link">
                <i class="nav-icon fas fa-users"></i>
               <p>
                 Usuarios
@@ -140,17 +140,17 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="usuarioview.php.php" class="nav-link">
+                <a href="usuarioview.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <i class="fas fa-users-cog nav-icon"></i>
-                  <p>Gestionar</p>
+                  <p>Agregar usuario</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="tipousuarioview.php" class="nav-link">
+                <a href="usuarioview.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <i class="fas fa-users-cog nav-icon"></i>
-                  <p>Tipos</p>
+                  <p>Ver Tipos</p>
                 </a>
               </li>
             </ul>
