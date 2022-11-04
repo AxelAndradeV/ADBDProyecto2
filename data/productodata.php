@@ -39,6 +39,7 @@
             return $stm->fetchAll(PDO::FETCH_ASSOC);
          }
 
+<<<<<<< HEAD
          public function insertarProducto($producto){
 			$pdo = Database::conectar();
             $stm = $pdo->prepare("CALL insertarProducto(?,?,?,?,?,?)");
@@ -67,6 +68,29 @@
 	           
 	        return $resultado;
 		}
+=======
+        public function eliminarCategoria($id){
+            $pdo = Database::conectar();
+            $stm = $pdo->prepare("CALL eliminarCategoria(?)");
+            $stm ->bindParam(1,$id,PDO::PARAM_INT);
+            $resultado = $stm->execute();
+            Database::desconectar();
+               
+            return $resultado;
+
+        }
+
+        public function eliminar($id){
+            $pdo = Database::conectar();
+            $stm = $pdo->prepare("CALL eliminarCategoria(?)");
+            $stm ->bindParam(1,$id,PDO::PARAM_INT);
+            $resultado = $stm->execute();
+            Database::desconectar();
+               
+            return $resultado;
+
+        }
+>>>>>>> origin/main
 
     }
 ?>

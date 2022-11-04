@@ -3,15 +3,21 @@
     class Producto{
         private $productoid ;
         private $productonombre;
+        private $productoimg;
         private $productoprecio;
         private $productoestado;
         private $productocategoria;
         private $productocodigo;
         private $productoimagen;
 
+
         public function __construct($id, $nombre,$precio,$estado,$categoria,$codigo,$imagen){
+
+        public function __construct($id, $nombre, $img,$precio,$estado,$categoria,$codigo){
+
             $this->productoid = $id;
             $this->productonombre = $nombre;
+            $this->productoimg = $img;
             $this->productoprecio = $precio;
             $this->productoestado = $estado;
             $this->productocategoria = $categoria;

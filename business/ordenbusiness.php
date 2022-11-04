@@ -1,7 +1,13 @@
 <?php 
 
 
-include '../data/ordendata.php';
+if (is_file("../data/ordendata.php")){
+	include ("../data/ordendata.php");
+}else{
+	include ("../../data/ordendata.php");
+}
+
+//include '../data/ordendata.php';
 
 class OrdenBusiness{
 
@@ -19,6 +25,14 @@ class OrdenBusiness{
 		return $this->ordenData->insertarTBDetalle($detalle);	
 	}
 
+	public function modificarOrden($ordenid,$ordenestado){
+		return $this->ordenData->modificarOrden($ordenid,$ordenestado);		
+	}
+
+	public function eliminarOrden($id){
+		return $this->ordenData->eliminarOrden($id);	
+	}
+
 	public function getUltimoIdOrden(){
 		return $this->ordenData->getUltimoIdInsertado();
 	}
@@ -26,6 +40,10 @@ class OrdenBusiness{
 
 	public function getAllTBOrdenes(){
 		return $this->ordenData->getAllTBOrdenes();
+	}
+
+	public function getAllTBDetalles($ordenid){
+		return $this->ordenData->getAllTBDetalles($ordenid);
 	}
 
 }
