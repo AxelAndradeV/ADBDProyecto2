@@ -11,9 +11,9 @@
         private $productoimagen;
 
 
-        public function __construct($id, $nombre,$precio,$estado,$categoria,$codigo,$imagen){
+       
 
-        public function __construct($id, $nombre, $img,$precio,$estado,$categoria,$codigo){
+        function __construct($id, $nombre, $img,$precio,$estado,$categoria,$codigo){
 
             $this->productoid = $id;
             $this->productonombre = $nombre;
@@ -22,7 +22,7 @@
             $this->productoestado = $estado;
             $this->productocategoria = $categoria;
             $this->productocodigo = $codigo;
-            $this->productoimagen = $imagen;
+            $this->productoimagen = $img;
         }
 
         function setIdProducto($id){
@@ -65,8 +65,8 @@
             return $this->productocategoria;
         }
 
-        function setImagenProducto($imagen){
-            $this->productoimagen = $imagen;
+        function setImagenProducto($img){
+            $this->productoimagen = $img;
         }
 
         function getImagenProducto(){

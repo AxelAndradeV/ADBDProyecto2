@@ -39,7 +39,7 @@
             return $stm->fetchAll(PDO::FETCH_ASSOC);
          }
 
-<<<<<<< HEAD
+
          public function insertarProducto($producto){
 			$pdo = Database::conectar();
             $stm = $pdo->prepare("CALL insertarProducto(?,?,?,?,?,?)");
@@ -68,7 +68,7 @@
 	           
 	        return $resultado;
 		}
-=======
+
         public function eliminarCategoria($id){
             $pdo = Database::conectar();
             $stm = $pdo->prepare("CALL eliminarCategoria(?)");
@@ -90,7 +90,7 @@
             return $resultado;
 
         }
->>>>>>> origin/main
+
 
     }
 ?>
