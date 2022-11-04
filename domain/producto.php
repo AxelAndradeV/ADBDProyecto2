@@ -8,7 +8,7 @@
         private $productoestado;
         private $productocategoria;
         private $productocodigo;
-        private $productoimagen;
+       
 
 
        
@@ -22,7 +22,7 @@
             $this->productoestado = $estado;
             $this->productocategoria = $categoria;
             $this->productocodigo = $codigo;
-            $this->productoimagen = $img;
+       
         }
 
         function setIdProducto($id){

@@ -42,7 +42,7 @@
 
          public function insertarProducto($producto){
 			$pdo = Database::conectar();
-            $stm = $pdo->prepare("CALL insertarProducto(?,?,?,?,?,?)");
+            $stm = $pdo->prepare("CALL insertarProducto(?,?,?,?,?,?,?)");
 
             $max = $pdo ->prepare("SELECT MAX(productoid) AS productoid  FROM tbproducto");
 	        $max -> execute();
@@ -51,27 +51,29 @@
 	        if($row = $max->fetch()){
 	           $nextId = $row[0]+1;
 	        }
-	        $productonombre = $producto->getNombreProducto();
-	        $productoprecio = $producto->getPrecioProducto();
-	        $productoestado = $producto->getEstadoProducto();
-            $productocategoria = $producto->getCategoria();
-            $productocodigo = $producto->getProductocodigo();
-            $productoimagen = $producto->getImagen();
+	        
+	        $nombre = $producto->getNombreProducto();
+	        $img = $producto->getImagenProducto();
+            $precio = $producto->getPrecioProducto();
+            $estado = $producto->getEstadoProducto();
+            $categoria = $producto->getCategoriaProducto();
+            $codigo = $producto->getProductocodigo();
             $stm ->bindParam(1,$nextId,PDO::PARAM_INT);
-            $stm ->bindParam(2,$productonombre,PDO::PARAM_STR);
-            $stm ->bindParam(2,$productoprecio,PDO::PARAM_STR);
-            $stm ->bindParam(2,$productoestado,PDO::PARAM_STR);
-            $stm ->bindParam(3,$productocodigo,PDO::PARAM_STR);
-            $stm ->bindParam(4,$productoimagen,PDO::PARAM_INT);
+            $stm ->bindParam(2,$nombre,PDO::PARAM_STR);
+            $stm ->bindParam(3,$img,PDO::PARAM_STR);
+            $stm ->bindParam(4,$precio,PDO::PARAM_STR);
+            $stm ->bindParam(5,$estado,PDO::PARAM_STR);
+            $stm ->bindParam(6,$categoria,PDO::PARAM_STR);
+            $stm ->bindParam(7,$codigo,PDO::PARAM_INT);
             $resultado = $stm->execute();
             Database::desconectar();
 	           
 	        return $resultado;
 		}
 
-        public function eliminarCategoria($id){
+        public function eliminarProducto($id){
             $pdo = Database::conectar();
-            $stm = $pdo->prepare("CALL eliminarCategoria(?)");
+            $stm = $pdo->prepare("CALL eliminarProducto(?)");
             $stm ->bindParam(1,$id,PDO::PARAM_INT);
             $resultado = $stm->execute();
             Database::desconectar();
@@ -80,9 +82,23 @@
 
         }
 
+        public function getUltimoIdInsertado(){
+        	$pdo = Database::conectar();
+	        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	        $stmt = $pdo ->prepare("SELECT MAX(productoid) AS productoid  FROM tbproducto");
+	        $stmt -> execute();
+	        $nextId = 1;
+	                
+	        if($row = $stmt->fetch()){
+	           $nextId = $row[0]+1;
+	        }
+
+	        return $nextId;
+        }
+
         public function eliminar($id){
             $pdo = Database::conectar();
-            $stm = $pdo->prepare("CALL eliminarCategoria(?)");
+            $stm = $pdo->prepare("CALL eliminarProducto(?)");
             $stm ->bindParam(1,$id,PDO::PARAM_INT);
             $resultado = $stm->execute();
             Database::desconectar();

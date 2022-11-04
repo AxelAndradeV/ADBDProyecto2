@@ -1,13 +1,13 @@
 <?php 	 
 	
-	include 'categoriabusiness.php';
+	include 'productobusiness.php';
 
 	if(isset($_POST['insertar'])){
-		if(isset($_POST['categoriadescripcion'])){
-			$categoriaBusiness = new CategoriaBusiness();
-			$descripcion = $_POST['categoriadescripcion'];
-			$ruta = "img/categorias/default/anonymous.png";
-			$codigo = $categoriaBusiness->getUltimoIdInsertado()+11;
+		if(isset($_POST['productonombre'])){
+			$productoBusiness = new ProductoBusiness();
+			$productonombre = $_POST['productonombre'];
+			$ruta = "img/productos/default/anonymous.png";
+			$codigo = $productoBusiness->getUltimoIdInsertado()+11;
 			if(isset($_FILES["nuevaImagen"]["tmp_name"])){
 
 				list($ancho, $alto) = getimagesize($_FILES["nuevaImagen"]["tmp_name"]);
@@ -16,14 +16,14 @@
 				// $nuevoAncho = 160;
 	   //  		$nuevoAlto = 200;
 	    		$aleatorio = mt_rand(100,999);
-	    		$directorio = "../view/backend/img/categorias/".$codigo;
+	    		$directorio = "../view/backend/img/productos/".$codigo;
 				mkdir($directorio, 0755);
 
 				 if($_FILES["nuevaImagen"]["type"] == "image/jpeg"){
 
 
 				     $ruta = $directorio."/".$aleatorio.".jpg";
-				     $rutaAux = "img/categorias/".$codigo."/".$aleatorio.".jpg";
+				     $rutaAux = "img/productos/".$codigo."/".$aleatorio.".jpg";
 				     $origen = imagecreatefromjpeg($_FILES["nuevaImagen"]["tmp_name"]);      
 
 				     $destino = imagecreatetruecolor(160, 160);
@@ -38,7 +38,7 @@
 
 
 				     $ruta = $directorio."/".$aleatorio.".png";
-				     $rutaAux = "img/categorias/".$codigo."/".$aleatorio.".png";
+				     $rutaAux = "img/productos/".$codigo."/".$aleatorio.".png";
 
 				     $origen = imagecreatefrompng($_FILES["nuevaImagen"]["tmp_name"]);      
 
@@ -54,16 +54,20 @@
 			}
 
 			
-	    	$categoria = new Categoria();
-	    	$categoria->setDescripcion($descripcion);
-	    	$categoria->setImagen($rutaAux);
-	    	$categoria->setCodigo($codigo);
-	    	$resultado = $categoriaBusiness->insertarCategoria($categoria);
+	    	$producto = new Producto();
+	    	$producto->setNombre($nombre);
+	    	$producto->setImagenProducto($rutaAux);
+	    	$producto->setPrecioProducto($precio);
+			$producto->setEstadoProducto($estado);
+			$producto->setCategoriaProducto($categoria);
+			$producto->setProductocodigo($codigo);
+			
+	    	$resultado = $productoBusiness->insertarProducto($producto);
 
 	    	if($resultado == 1){
-	    		header("location: ../view/backend/categoriaview.php?mensaje=1" );
+	    		header("location: ../view/backend/productoview.php?mensaje=1" );
 	    	}else{
-	    		header("location: ../view/backend/categoriaview.php?mensaje=4" );
+	    		header("location: ../view/backend/productoview.php?mensaje=4" );
 	    	}
 			
 

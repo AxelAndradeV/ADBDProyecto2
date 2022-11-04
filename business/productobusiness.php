@@ -20,6 +20,10 @@ class ProductoBusiness{
     	return $this->productoData->getTotalProductos();
     }
 
+    public function insertarProducto($producto){
+        return $this->productoData->insertarProducto($producto);
+    }
+
     public function getPaginasProducto($inicio, $cantidad){
     	return $this->productoData->getPaginasProducto($inicio, $cantidad);
     }
@@ -33,6 +37,10 @@ class ProductoBusiness{
 
     public function getAllTBProductos(){
         return $this->productoData->getAllTBProductos();
+    }
+
+    public function getUltimoIdInsertado(){
+        return $this->productoData->getUltimoIdInsertado();
     }
 
 }
