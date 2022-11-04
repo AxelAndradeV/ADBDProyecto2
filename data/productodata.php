@@ -52,15 +52,15 @@
 	           $nextId = $row[0]+1;
 	        }
 	        
-	        $nombre = $producto->getNombreProducto();
-	        $img = $producto->getImagenProducto();
+            $img = $producto->getImagenProducto();
+	        $nombre = $producto->getNombreProducto();	        
             $precio = $producto->getPrecioProducto();
             $estado = $producto->getEstadoProducto();
             $categoria = $producto->getCategoriaProducto();
             $codigo = $producto->getProductocodigo();
             $stm ->bindParam(1,$nextId,PDO::PARAM_INT);
-            $stm ->bindParam(2,$nombre,PDO::PARAM_STR);
-            $stm ->bindParam(3,$img,PDO::PARAM_STR);
+            $stm ->bindParam(2,$img,PDO::PARAM_STR);
+            $stm ->bindParam(3,$nombre,PDO::PARAM_STR);          
             $stm ->bindParam(4,$precio,PDO::PARAM_INT);
             $stm ->bindParam(5,$estado,PDO::PARAM_INT);
             $stm ->bindParam(6,$categoria,PDO::PARAM_INT);
@@ -136,8 +136,9 @@
   $pro = new Producto();
 
 
- $pro->setNombre("pinto");
+
  $pro->setImagenProducto("fdfgg");
+ $pro->setNombre("pinto");
  $pro->setPrecioProducto(456);
  $pro->setEstadoProducto(7);
  $pro->setCategoriaProducto(9);

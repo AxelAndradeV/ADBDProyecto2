@@ -282,14 +282,6 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
             <form method="POST" action="../../business/productoaction.php"  enctype="multipart/form-data">
               <div class="form-group">
                 
-            
-
-              <div class="form-group">
-                <label >Nombre:</label>
-                <input type="text" class="form-control" name="productonombre" id="productonombre" placeholder="Ingrese nombre">
-               
-              </div>
-
               <div class="form-group">
                 <label >Imagen: </label>
                 <input type="file" class="nuevaImagen" name="editarImagen">
@@ -301,6 +293,14 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
               <input type="hidden" name="imagenActual" id="imagenActual">
 
               </div>
+
+              <div class="form-group">
+                <label >Nombre:</label>
+                <input type="text" class="form-control" name="productonombre" id="productonombre" placeholder="Ingrese nombre">
+               
+              </div>
+
+             
 
               <div class="form-group">
                 <label >Precio: </label>

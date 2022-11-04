@@ -53,11 +53,11 @@
         }
 
         function setImagenProducto($productoimg){
-            $this->productoimagen = $productoimg;
+            $this->productoimg = $productoimg;
         }
 
         function getImagenProducto(){
-            return $this->productoimagen;
+            return $this->productoimg;
         }
 
     

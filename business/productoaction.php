@@ -5,8 +5,8 @@
 	if(isset($_POST['insertar'])){
 		if(isset($_POST['productonombre'])){
 			$productoBusiness = new ProductoBusiness();
-			$nombre = $_POST['productonombre'];
-			$ruta = "img/productos/default/anonymous.png";
+			$img = "img/productos/default/anonymous.png";
+			$nombre = $_POST['productonombre'];			
 			$precio = $_POST['productoprecio'];
 			$estado = $_POST['productoestado'];
 			$categoria = $_POST['productocategoriaid'];
@@ -25,7 +25,7 @@
 				 if($_FILES["nuevaImagen"]["type"] == "image/jpeg"){
 
 
-				     $ruta = $directorio."/".$aleatorio.".jpg";
+				     $img = $directorio."/".$aleatorio.".jpg";
 				     $rutaAux = "img/productos/".$codigo."/".$aleatorio.".jpg";
 				     $origen = imagecreatefromjpeg($_FILES["nuevaImagen"]["tmp_name"]);      
 
@@ -58,8 +58,8 @@
 
 			
 	    	$producto = new Producto();
-			$producto->setNombre($nombre);
-			$producto->setImagenProducto($rutaAux);	    		    	
+			$producto->setImagenProducto($img);	 
+			$producto->setNombre($nombre);			   		    	
 	    	$producto->setPrecioProducto($precio);
 			$producto->setEstadoProducto($estado);
 			$producto->setCategoriaProducto($categoria);
@@ -84,7 +84,7 @@
 				$datos .= "<tr>";
 				$datos .= "<td>".$resultado[$i]['productoid']."</td>";
 				$datos .= "<td>".$resultado[$i]['productoimg']."</td>";
-				$datos .= "<td>".$resultado[$i]['productonombre']."</td>";
+				$datos .= "<td>".$resultado[$i]['productonombre']."</td>";							
 				$datos .= "<td>".$resultado[$i]['productoprecio']."</td>";
 				$datos .= "<td>".$resultado[$i]['productoestado']."</td>";
 				$datos .= "<td>".$resultado[$i]['productocategoria']."</td>";
