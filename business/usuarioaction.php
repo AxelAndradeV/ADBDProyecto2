@@ -13,11 +13,6 @@
             $password = $_POST['usuariopassword'];
             $tipoid = $_POST['usuariotipoid'];
 			
-			
-	    		
-
-	    		
-			
 
 			
 	    	$usuario = new Usuario();

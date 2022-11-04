@@ -132,18 +132,18 @@
 
     }
 
-     $data = new ProductoData();
-  $pro = new Producto();
+    // $data = new ProductoData();
+ // $pro = new Producto();
 
 
 
- $pro->setImagenProducto("fdfgg");
- $pro->setNombre("pinto");
- $pro->setPrecioProducto(456);
- $pro->setEstadoProducto(7);
- $pro->setCategoriaProducto(9);
- $pro->setProductocodigo(2);
- echo $data->insertarProducto($pro);
+// $pro->setImagenProducto("fdfgg");
+ //$pro->setNombre("pinto");
+ //$pro->setPrecioProducto(456);
+ //$pro->setEstadoProducto(7);
+ //$pro->setCategoriaProducto(9);
+ //$pro->setProductocodigo(2);
+ //echo $data->insertarProducto($pro);
  //$pro->setIdProducto(2);
  //$pro->setNombre("pinto");
 //$pro->setImagenProducto("test");
