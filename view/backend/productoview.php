@@ -331,9 +331,12 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
               <input type="hidden" name="imagenActual" id="imagenActual">
 
               </div>
+             
               
-             <center><button type="submit" name="actualizar" class="btn btn-primary">Actualizar</button></center> 
+              
+              <center><button type="submit" name="insertar" class="btn btn-primary">Insertar</button></center> 
             </form>
+          
 
     </div>
 
