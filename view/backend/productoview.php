@@ -269,7 +269,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
     <div class="modal-content">
 
         <div class="modal-header">
-          <h4 class="modal-title">Agregars producto</h4>
+          <h4 class="modal-title">Agregar producto</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -282,15 +282,26 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
             <form method="POST" action="../../business/productoaction.php"  enctype="multipart/form-data">
               <div class="form-group">
                 
-                <input type="hidden" class="form-control" name="productoid" id="productoid" >
-               
-              </div>
+            
 
               <div class="form-group">
                 <label >Nombre:</label>
                 <input type="text" class="form-control" name="productonombre" id="productonombre" placeholder="Ingrese nombre">
                
               </div>
+
+              <div class="form-group">
+                <label >Imagen: </label>
+                <input type="file" class="nuevaImagen" name="editarImagen">
+
+                <p class="help-block">Peso máximo de la imagen 2MB</p>
+
+                <img src="img/productos/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
+
+              <input type="hidden" name="imagenActual" id="imagenActual">
+
+              </div>
+
               <div class="form-group">
                 <label >Precio: </label>
                 <input type="text" class="form-control" name="productoprecio" id="productoprecio" placeholder="Ingrese precio">
@@ -303,7 +314,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 
               <div class="form-group">
                 <label >Categoria:</label>
-                <input type="text" class="form-control" name="productocategoriaid" id="productocategoriaid" placeholder="Ingrese categoria">
+                <input type="text" class="form-control" name="productocategoria" id="productocategoria" placeholder="Ingrese categoria">
                
               </div>
 
@@ -320,17 +331,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 
 
 
-              <div class="form-group">
-                <label >Imagen: </label>
-                <input type="file" class="nuevaImagen" name="editarImagen">
-
-                <p class="help-block">Peso máximo de la imagen 2MB</p>
-
-                <img src="img/productos/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
-
-              <input type="hidden" name="imagenActual" id="imagenActual">
-
-              </div>
+           
              
               
               
@@ -370,7 +371,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
               <div class="form-group">
                 
                 <input type="hidden" class="form-control" name="productoid" id="productoid" >
-               
+                <input type="hidden" class="form-control" name="productocodigo" id="productocodigo" >
               </div>
 
               <div class="form-group">
@@ -384,9 +385,18 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
               </div>
 
               <div class="form-group">
-                <label >Categoria: </label>
-                <input type="text" class="form-control" name="productocategoriaid" id="productocategoriaid" placeholder="Ingrese categoria">
+                <label >Estado: </label>
+                <input type="text" class="form-control" name="productoestado" id="productoestado" placeholder="Ingrese estado">
               </div>
+
+              <div class="form-group">
+                <label >Categoria:</label>
+                <input type="text" class="form-control" name="productocategoria" id="productocategoria" placeholder="Ingrese categoria">
+               
+              </div>
+             
+
+            
 
 
 
@@ -461,10 +471,59 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 <script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="plugins/sweetalert2/sweetalert2.min.js"></script>
+<script src="plugins/toastr/toastr.min.js"></script>
+
+<?php 
+  //ALERTAS
+  echo '<script>';
+  echo " var Toast = Swal.mixin({
+       toast: true,
+       position: 'top-right',
+       showConfirmButton: false,
+       timer: 3000,
+       timerProgressBar: true
+     });";
+  if($_GET['mensaje']==1){ //insertar
+    echo "Toast.fire({
+         icon: 'success',
+
+        title: '<div style=margin-top:0.5rem;>Insertado con éxito.</div>'
+     });";
+  }else if($_GET['mensaje']==2){ //actualizar
+    echo "Toast.fire({
+         icon: 'success',
+        title: '<div style=margin-top:0.5rem;>Actualizado con éxito.</div>'
+     });";
+  }else if($_GET['mensaje'] == 3){ //eliminar
+    echo "Toast.fire({
+         icon: 'success',
+        title: '<div style=margin-top:0.5rem;>Eliminado con éxito.</div>'
+     });";
+  }else if($_GET['mensaje'] == 4){ //error
+    echo " Toast.fire({
+        icon: 'error',
+        title: '<div style=margin-top:0.5rem;>Error al efectuar la operación.</div>'
+      })";
+  }
+  echo "</script>";
+
+?>
+
+<script>
+     // var Toast = Swal.mixin({
+     //   toast: true,
+     //   position: 'top-end',
+     //   showConfirmButton: false,
+     //   timer: 3000
+     // });
+ 
+</script>
+
 <script>
   $(function () {
-  
-    $('.tabla-productos').DataTable({
+
+    $('#productos').DataTable({
        "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
         },
@@ -482,28 +541,67 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 <script>
   $(".tabla-productos tbody").on("click", "button.btnEditarProducto", function(){
 
-    alert(20);
-    // var idProducto = $(this).attr("productoid");
-    // var nombre = $(this).attr("nombre");
-    // var precio = $(this).attr("precio");
-    // var estado = $(this).attr("estado");
-    // var img = $(this).attr("imagen");
-    // alert(img);
-    // $("#productoid").val(idProducto);
-    // $("#productonombre").val(nombre);
-    // $("#productoprecio").val(precio);
-    // $("#imagenActual").val(img);
-    // $(".previsualizar").attr("src", img);
+    var productoid = $(this).attr("productoid");
+    var productoimg = $(this).attr("productoimg");
+    var productonombre = $(this).attr("productonombre");
+    var productoprecio = $(this).attr("productoprecio");
+    var productoestado = $(this).attr("productoestado");
+    var productocategoria = $(this).attr("productocategoria");
+    var productocodigo =  $(this).attr("productocodigo");
+    alert(img);
+    $("#modalEditarProducto #productoid").val(productoid);
+    $("#modalEditarProducto #productonombre").val(productonombre);
+    $("#modalEditarProducto #productoprecio").val(productoprecio);
+    $("#modalEditarProducto #productoestado").val(productoestado);
+    $("#modalEditarProducto #productocategoria").val(productocategoria);
+    $("#modalEditarProducto #productocodigo").val(productocodigo);
+    $("#modalEditarProducto #imagenActual").val(productoimg);
+    $("#modalEditarProducto .previsualizar").attr("src", productoimg);
   
 
 });
 
-  $(".tabla-productos tbody").on("click", "button.btnEliminarProducto", function(){
+  
+$(".tabla-productos tbody").on("click", "button.btnEliminarProducto", function(){
 
-  var idProducto = $(this).attr("productoid");
-  var imagen = $(this).attr("imagen");
-
-  alert(idProducto);
+  var productoid = $(this).attr("productoid");
+  var productoimg = $(this).attr("productoimg");
+  var productonombre = $(this).attr("productonombre");
+  var productoprecio = $(this).attr("productoprecio");
+  var productoestado = $(this).attr("productoestado");
+  var productocategoria = $(this).attr("productocategoria");
+  var productocodigo = $(this).attr("productocodigo");
+//   var Toast = Swal.mixin({
+//       toast: true,
+//       position: 'top-end',
+//       showConfirmButton: false,
+//       timer: 3000
+//     });
+// Toast.fire({
+//         icon: 'success',
+//         title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+//       });
+      Swal.fire({
+        title: '¿Desea eliminar el producto?',
+        text: "No se podrá revertir el cambio",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+         cancelButtonText: "Cancelar",
+        confirmButtonText: 'Eliminar'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location = "../../business/productoaction.php?eliminar=true&productoid="+productoid+"&productoimg="+productoimg+"&productonombre="+productonombre
+            +"&productoestado="+productoestado+"&productocategoria="+productocategoria+"&productocodigo="+productocodigo;
+            // Swal.fire(
+            //   'Deleted!',
+            //   'Your file has been deleted.',
+            //   'success'
+            // )
+          }
+    })
+  //alert(categoriaid);
   //Con esto se puede redireccionar al action
   //window.location = "test.php?productonombre="+idProducto;
 

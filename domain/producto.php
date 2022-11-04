@@ -11,62 +11,49 @@
        
 
 
-       
 
-        function __construct($id, $nombre, $img,$precio,$estado,$categoria,$codigo){
-
-            $this->productoid = $id;
-            $this->productonombre = $nombre;
-            $this->productoimg = $img;
-            $this->productoprecio = $precio;
-            $this->productoestado = $estado;
-            $this->productocategoria = $categoria;
-            $this->productocodigo = $codigo;
-       
-        }
-
-        function setIdProducto($id){
-            $this->productoid = $id;
+        function setIdProducto($productoid){
+            $this->productoid = $productoid;
         }
 
         function getIdProducto(){
             return $this->productoid;
         }
 
-        function setNombre($nombre){
-            $this->productonombre = $nombre;
+        function setNombre($productonombre){
+            $this->productonombre = $productonombre;
         }
 
         function getNombreProducto(){
             return $this->productonombre;
         }
 
-        function setPrecioProducto($precio){
-            $this->productoprecio = $precio;
+        function setPrecioProducto($productoprecio){
+            $this->productoprecio = $productoprecio;
         }
 
         function getPrecioProducto(){
             return $this->productoprecio;
         }
 
-        function setEstadoProducto($estado){
-            $this->productoestado = $estado;
+        function setEstadoProducto($productoestado){
+            $this->productoestado = $productoestado;
         }
 
         function getEstadoProducto(){
             return $this->productoestado;
         }
 
-        function setCategoriaProducto($categoria){
-            $this->productocategoria = $categoria;
+        function setCategoriaProducto($productocategoria){
+            $this->productocategoria = $productocategoria;
         }
 
         function getCategoriaProducto(){
             return $this->productocategoria;
         }
 
-        function setImagenProducto($img){
-            $this->productoimagen = $img;
+        function setImagenProducto($productoimg){
+            $this->productoimagen = $productoimg;
         }
 
         function getImagenProducto(){

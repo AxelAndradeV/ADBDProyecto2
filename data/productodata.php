@@ -61,9 +61,9 @@
             $stm ->bindParam(1,$nextId,PDO::PARAM_INT);
             $stm ->bindParam(2,$nombre,PDO::PARAM_STR);
             $stm ->bindParam(3,$img,PDO::PARAM_STR);
-            $stm ->bindParam(4,$precio,PDO::PARAM_STR);
-            $stm ->bindParam(5,$estado,PDO::PARAM_STR);
-            $stm ->bindParam(6,$categoria,PDO::PARAM_STR);
+            $stm ->bindParam(4,$precio,PDO::PARAM_INT);
+            $stm ->bindParam(5,$estado,PDO::PARAM_INT);
+            $stm ->bindParam(6,$categoria,PDO::PARAM_INT);
             $stm ->bindParam(7,$codigo,PDO::PARAM_INT);
             $resultado = $stm->execute();
             Database::desconectar();
@@ -95,11 +95,33 @@
 
 	        return $nextId;
         }
+        public function modificarProducto($producto){
+			$pdo = Database::conectar();
+            $stm = $pdo->prepare("CALL modificarProducto(?,?,?,?,?,?,?)");
+            $productoid = $producto->getIdProducto();
+            $productoimg = $producto->getImagenProducto();
+            $productonombre = $producto->getNombreProducto();
+            $productoprecio = $producto->getPrecioProducto();
+            $productoestado = $producto->getEstadoProducto();
+            $productocategoria = $producto->getCategoriaProducto();
+            $productocodigo = $producto->getProductocodigo();
+            $stm ->bindParam(1,$productoid,PDO::PARAM_INT);
+            $stm ->bindParam(2,$productonombre,PDO::PARAM_STR);
+            $stm ->bindParam(3,$productoimg,PDO::PARAM_STR);           
+            $stm ->bindParam(4,$productoprecio,PDO::PARAM_INT);
+            $stm ->bindParam(5,$productoestado,PDO::PARAM_INT);
+            $stm ->bindParam(6,$productocategoria,PDO::PARAM_INT);
+            $stm ->bindParam(7,$productocodigo,PDO::PARAM_INT);
+            $resultado = $stm->execute();
+            Database::desconectar();
+	           
+	        return $resultado;
+		}
 
-        public function eliminar($id){
+        public function eliminar($productoid){
             $pdo = Database::conectar();
             $stm = $pdo->prepare("CALL eliminarProducto(?)");
-            $stm ->bindParam(1,$id,PDO::PARAM_INT);
+            $stm ->bindParam(1,$productoid,PDO::PARAM_INT);
             $resultado = $stm->execute();
             Database::desconectar();
                
@@ -109,4 +131,25 @@
 
 
     }
+
+     $data = new ProductoData();
+  $pro = new Producto();
+
+
+ $pro->setNombre("pinto");
+ $pro->setImagenProducto("fdfgg");
+ $pro->setPrecioProducto(456);
+ $pro->setEstadoProducto(7);
+ $pro->setCategoriaProducto(9);
+ $pro->setProductocodigo(2);
+ echo $data->insertarProducto($pro);
+ //$pro->setIdProducto(2);
+ //$pro->setNombre("pinto");
+//$pro->setImagenProducto("test");
+//$pro->setPrecioProducto(56);
+//$pro->setEstadoProducto(73);
+//$pro->setCategoriaProducto(93);
+ //$pro->setProductocodigo(23);
+ // echo $data->modificarProducto($pro);
+ //  echo $data->eliminarProducto(13);
 ?>
