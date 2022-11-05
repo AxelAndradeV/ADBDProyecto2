@@ -234,16 +234,16 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                         foreach($usuarios as $usuario){
                           echo '<tr>';
                           echo '<td>'.$usuario['usuarionombre'].'</td>';
-                          echo '<td>';
+                         
                           echo '<td>'.$usuario['usuariotelefono'].'</td>';
-                          echo '<td>';
+                         
                           echo '<td>'.$usuario['usuariocorreo'].'</td>';
-                          echo '<td>';
+                          
                           echo '<td>'.$usuario['usuariopassword'].'</td>';
+                         
+                          echo '<td>'.$usuario['tipoid'].'</td>';
                           echo '<td>';
-                          echo '<td>'.$usuario['usuariotipoid'].'</td>';
-                          echo '<td>';
-                          echo "<div class='btn-group'><button class='btn btn-warning btnEditarUsuario' id='".$usuario["usuarioid"]."' telefono='".$usuario['usuariotelefono']."'  correo='".$usuario["usuariocorreo"]."' password='".$usuario["usuariopassword"]."' tipoid='".$usuario["usuariotipoid"]."' data-toggle='modal' data-target='#modalEditarUsuario'><i class='fa fa-pencil-alt'></i></button><button class='btn btn-danger btnEliminarusuario' id='".$usuario["usuarioid"]."' telefono='".$usuario["usuariotelefono"]."' correo='".$usuario["usuariocorreo"]."' password='".$usuario["usuariopassword"]."' tipoid='".$usuario["usuariotipoid"]."' ><i class='fa fa-times'></i></button></div>";
+                          echo "<div class='btn-group'><button class='btn btn-warning btnEditarUsuario' id='".$usuario["usuarioid"]."' telefono='".$usuario['usuariotelefono']."'  correo='".$usuario["usuariocorreo"]."' password='".$usuario["usuariopassword"]."' tipoid='".$usuario["tipoid"]."' data-toggle='modal' data-target='#modalEditarUsuario'><i class='fa fa-pencil-alt'></i></button><button class='btn btn-danger btnEliminarusuario' id='".$usuario["usuarioid"]."' telefono='".$usuario["usuariotelefono"]."' correo='".$usuario["usuariocorreo"]."' password='".$usuario["usuariopassword"]."' tipoid='".$usuario["tipoid"]."' ><i class='fa fa-times'></i></button></div>";
                           echo '</td>';
                           echo '</tr>';
                         }
@@ -387,7 +387,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
               
               <div class="form-group">
                 <label >Tipo de usuario:</label>
-                <input type="text" class="form-control" name="usuariotipoid" id="usuariotipoid" placeholder="Ingrese el tipo">
+                <input type="text" class="form-control" name="tipoid" id="tipoid" placeholder="Ingrese el tipo">
                
               </div>
               
@@ -524,19 +524,19 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 <script>
   $(".tabla-usuarios tbody").on("click", "button.btnEditarUsuario", function(){
 
-    var id = $(this).attr("id");
-    var nombre = $(this).attr("nombre");
-    var telefono = $(this).attr("telefono");
-    var correo =  $(this).attr("correo");
-    var password = $(this).attr("password");
+    var id = $(this).attr("usuarioid");
+    var nombre = $(this).attr("usuarionombre");
+    var telefono = $(this).attr("usuariotelefono");
+    var correo =  $(this).attr("usuariocorreo");
+    var password = $(this).attr("usuariopassword");
     var tipoid =  $(this).attr("tipoid");
     alert(usu);
     $("#modalEditarUsuario #usuarioid").val(id);
     $("#modalEditarUsuario #usuarionombre").val(nombre);
     $("#modalEditarUsuario #usuariotelefono").val(telefono);
-    $("#modalEditarUsuario #usuariocorreo").val(id);
-    $("#modalEditarUsuario #usuariopassword").val(nombre);
-    $("#modalEditarUsuario #usuariotipoid").val(telefono);
+    $("#modalEditarUsuario #usuariocorreo").val(correo);
+    $("#modalEditarUsuario #usuariopassword").val(password);
+    $("#modalEditarUsuario #tipoid").val(tipoid);
   
 
 });
@@ -547,6 +547,9 @@ $(".tabla-usuarios tbody").on("click", "button.btnEliminarUsuario", function(){
   var id = $(this).attr("usuarioid");
   var nombre = $(this).attr("usuarionombre");
   var telefono = $(this).attr("usuariotelefono");
+  var correo = $(this).attr("usuariocorreo");
+  var password = $(this).attr("usuariopassword");
+  var tipoid = $(this).attr("tipoid");
 //   var Toast = Swal.mixin({
 //       toast: true,
 //       position: 'top-end',
@@ -568,7 +571,7 @@ $(".tabla-usuarios tbody").on("click", "button.btnEliminarUsuario", function(){
         confirmButtonText: 'Eliminar'
         }).then((result) => {
           if (result.isConfirmed) {
-            window.location = "../../business/categoriaaction.php?eliminar=true&id="+categoriaid+"&imagen="+imagen+"&codigo="+codigo;
+            window.location = "../../business/usuarioaction.php?eliminar=true&id="+id+"&nombre="+nombre+"&telefono="+telefono+"&correo="+correo+"&password="+password+"&tipoid="+tipoid;
             // Swal.fire(
             //   'Deleted!',
             //   'Your file has been deleted.',
@@ -576,58 +579,12 @@ $(".tabla-usuarios tbody").on("click", "button.btnEliminarUsuario", function(){
             // )
           }
     })
-  //alert(categoriaid);
-  //Con esto se puede redireccionar al action
-  //window.location = "test.php?productonombre="+idProducto;
+  
 
 });
 
 
-$(".nuevaImagen").change(function(){
 
-  var imagen = this.files[0];
-  
-  /*=============================================
-    VALIDAMOS EL FORMATO DE LA IMAGEN SEA JPG O PNG
-    =============================================*/
-
-    if(imagen["type"] != "image/jpeg" && imagen["type"] != "image/png"){
-
-      $(".nuevaImagen").val("");
-
-       swal({
-          title: "Error al subir la imagen",
-          text: "¡La imagen debe estar en formato JPG o PNG!",
-          type: "error",
-          confirmButtonText: "¡Cerrar!"
-        });
-
-    }else if(imagen["size"] > 2000000){
-
-      $(".nuevaImagen").val("");
-
-       swal({
-          title: "Error al subir la imagen",
-          text: "¡La imagen no debe pesar más de 2MB!",
-          type: "error",
-          confirmButtonText: "¡Cerrar!"
-        });
-
-    }else{
-
-      var datosImagen = new FileReader;
-      datosImagen.readAsDataURL(imagen);
-
-      $(datosImagen).on("load", function(event){
-
-        var rutaImagen = event.target.result;
-
-        $(".previsualizar").attr("src", rutaImagen);
-
-      })
-
-    }
-})
 </script>
 </body>
 </html>
