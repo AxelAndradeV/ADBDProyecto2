@@ -20,13 +20,22 @@ class ProductoBusiness{
     	return $this->productoData->getTotalProductos();
     }
 
+    public function getTotalProductosCategoria($categoriaid){
+        return $this->productoData->getTotalProductosCategoria($categoriaid);
+    }
     public function getPaginasProducto($inicio, $cantidad){
     	return $this->productoData->getPaginasProducto($inicio, $cantidad);
+    }
+
+    public function getPaginasProductoCategoria($inicio, $cantidad,$categoriaid){
+        return $this->productoData->getPaginasProductoCategoria($inicio, $cantidad,$categoriaid);
     }
 
     public function getAllTBProductos(){
         return $this->productoData->getAllTBProductos();
     }
+
+   
 
 }
 

@@ -16,12 +16,12 @@
                     'productocantidad'=>$cantidad
                 );
                 $_SESSION['carrito'][0] = $producto;
-                header("location: ../view/frontend/index.php?pagina=1&mensaje=exito" );
+                header("location: ../view/frontend/index.php?pagina=1&mensaje=1" );
             }else{
                 $columnaids=array_column($_SESSION['carrito'],"productoid");
 
                 if(in_array($id,$columnaids)){
-                    header("location: ../view/frontend/index.php?pagina=1&mensaje=repetido" );
+                    header("location: ../view/frontend/index.php?pagina=1&mensaje=3" );
                 }else{
                     $cantidadProductos = count($_SESSION['carrito']);
                     $producto = array(
@@ -31,7 +31,7 @@
                         'productocantidad'=>$cantidad
                     );
                     $_SESSION['carrito'][$cantidadProductos] = $producto;
-                    header("location: ../view/frontend/index.php?pagina=1&mensaje=exito" );
+                    header("location: ../view/frontend/index.php?pagina=1&mensaje=1" );
                 }
                 
             }
@@ -48,7 +48,7 @@
                 }
             }
         }
-        header("location: ../view/frontend/carritoview.php?mensaje=Borrado con éxito :)");
+        header("location: ../view/frontend/carritoview.php?mensaje=1");
     }
    
 

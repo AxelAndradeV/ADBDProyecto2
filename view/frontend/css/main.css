@@ -73,3 +73,20 @@
     user-select: none;
 }
 
+.col .swiper{
+        margin: 0;
+        padding: 0;
+    }
+    .swiper-wrapper{
+       
+       width: 10rem;
+    }
+    .swiper-slide{
+        margin-top: -1.1rem;
+        margin-bottom: 0.5rem;
+    }
+    .swiper-slide:hover{
+    
+        animation: pulse;
+        animation-duration: 2s;
+    }

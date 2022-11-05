@@ -1,13 +1,21 @@
 <?php 
 session_start();
 include '../../business/productobusiness.php';
+include '../../business/categoriabusiness.php';
 
 $contador = 0;
 $cantidadPorPagina = 12;
 $productoBusiness = new ProductoBusiness();
 $paginas = $productoBusiness->getTotalProductos();
 
+$categoriaBusiness = new CategoriaBusiness();
+$categorias = $categoriaBusiness->getAllTBCategorias();
 
+
+
+// border-radius: 50%;  background: #ffffff;
+// box-shadow: inset -6px -6px 30px #c7c7c7,
+//             inset 6px 6px 30px #ffffff;
 
 
 
@@ -36,8 +44,12 @@ $paginas = $productoBusiness->getTotalProductos();
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
   />
 
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+/>
+<link rel="stylesheet" href="../backend/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+<link rel="stylesheet" href="../backend/plugins/toastr/toastr.min.css">
 
     
 </head>
@@ -49,27 +61,56 @@ $paginas = $productoBusiness->getTotalProductos();
 
     
     <div class="container">
+      <!--  <h1 class="text-center animate__animated animate__bounce" style="font-family:Amatic SC, sans-serif;font-weight: 600;">Categorías</h1> -->
+       <hr class="mt-3 mb-3 bg-faded"/>
+
+       <div class="container ">
+         <div class="row">
+            <div class="col-12 swiper animate__animated animate__flipInX animate__delay-1s">
+                <div class="swiper-wrapper" style="margin-bottom: 5rem; border-bottom: 1px solid black;">
+                <?php 
+
+                    foreach ($categorias as $categoria) {
+
+                        echo '<div class ="text-center swiper-slide" style="height:0;width:7%;padding-bottom:7%; ">
+            <div>
+            <a href=productocategoriaview.php?pagina=1&categoriaid='.$categoria['categoriaid'].'><img src="../backend/'.$categoria['categoriaimg'].'" alt="" style="width: 5rem;margin-top:0.8rem;"></a>
+            </div>
+        </div>';
+               
+                    }
+
+                ?>
+                </div>
+
+              
+            </div>
+
+        </div>  
+       </div>
         
-      
+         <hr class="mt-3 mb-3 bg-faded"/>
+        
+        
             
         <?php
-                    if (isset($_GET['mensaje'])) {
-                        if($_GET['mensaje']=="exito"){
-                            echo '<div class="alert alert-success" role="alert">';
-                            echo '<a href="carritoview.php" class="badge badge-success">Ver carrito</a>';
-                            echo '</div>';
-                        }else if($_GET['mensaje']=="repetido"){
-                            echo '<div class="alert alert-success" role="alert">';
-                            echo 'Ya ha sido agregado :c';
-                            echo '</div>';
-                        }
+                    // if (isset($_GET['mensaje'])) {
+                    //     if($_GET['mensaje']=="exito"){
+                    //         echo '<div class="alert alert-success" role="alert">';
+                    //         echo '<a href="carritoview.php" class="badge badge-success">Ver carrito</a>';
+                    //         echo '</div>';
+                    //     }else if($_GET['mensaje']=="repetido"){
+                    //         echo '<div class="alert alert-success" role="alert">';
+                    //         echo 'Ya ha sido agregado :c';
+                    //         echo '</div>';
+                    //     }
                         
                         
-                    } 
+                    // } 
         ?>
             
         
-
+        <br><br><br>
         <h1 class="text-center animate__animated animate__bounce" style="font-family:Amatic SC, sans-serif;font-weight: 600;">Productos</h1>
        
         <div class="row d-flex justify-content-center">
@@ -147,13 +188,72 @@ $paginas = $productoBusiness->getTotalProductos();
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+   
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+
+<script src="../backend/plugins/sweetalert2/sweetalert2.min.js"></script>
+<script src="../backend/plugins/toastr/toastr.min.js"></script>
+
+<?php 
+          //ALERTAS
+          echo '<script>';
+          echo " var Toast = Swal.mixin({
+               toast: true,
+               position: 'top-right',
+               showConfirmButton: false,
+               timer: 3000,
+               timerProgressBar: true
+             });";
+          if($_GET['mensaje']==1){ //insertar
+            echo "Toast.fire({
+                 icon: 'success',
+
+                title: '<div style=margin-top:0.5rem;>Se ha agregado al carrito.</div>'
+             });";
+          }else if($_GET['mensaje']==2){ //orden hecha
+            echo "Swal.fire({
+  title: '¡Su orden n° ".$_GET['ordenid']." está siendo procesada! <br> ¡Gracias por preferirnos!',
+  width: 700,
+  padding: '3em',
+  color: '#716add',
+  background: '#fff',
+  backdrop: `
+    white
+    url('../backend/img/otros/order.gif')
+    center
+    no-repeat
+  `
+})";
+          }else if($_GET['mensaje'] == 3){ //eliminar
+            echo "Toast.fire({
+                 icon: 'info',
+                title: '<div style=margin-top:0.5rem;>Ya ha agregado este producto.</div>'
+             });";
+          }else if($_GET['mensaje'] == 4){ //eliminar
+            echo "Toast.fire({
+                 icon: 'error',
+                title: '<div style=margin-top:0.5rem;>Error al procesar.</div>'
+             });";
+          }
+          echo "</script>";
+
+?>
+
+
 
     <script>
         
 
 $(document).ready(function(){
-      $('.your-class').slick();
+    const swiper = new Swiper('.swiper', {
+  // Optional parameters
+  direction: 'horizontal',
+  loop: true,
+  slidesPerView: 4
+  
+
+});
+
     });
     </script>
                 
