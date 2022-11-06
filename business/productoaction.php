@@ -3,14 +3,19 @@
 	include 'productobusiness.php';
 
 	if(isset($_POST['insertar'])){
-		if(isset($_POST['productonombre'])){
-			$productoBusiness = new ProductoBusiness();
-			$img = "img/productos/default/anonymous.png";
-			$nombre = $_POST['productonombre'];			
+		if(isset($_POST['productonombre'])
+		&&isset($_POST['productoprecio']) && isset($_POST['productoestado'])
+		&&isset($_POST['productocategoriaid']) &&isset($_POST['productocodigo'])
+		){
+			$productoBusiness = new ProductoBusiness();		
+			$nombre = $_POST['productonombre'];	
+			$ruta = "img/productos/default/anonymous.png";	
 			$precio = $_POST['productoprecio'];
 			$estado = $_POST['productoestado'];
 			$categoria = $_POST['productocategoriaid'];
 			$codigo = $_POST['productocodigo'];
+			
+
 			if(isset($_FILES["nuevaImagen"]["tmp_name"])){
 
 				list($ancho, $alto) = getimagesize($_FILES["nuevaImagen"]["tmp_name"]);
@@ -57,13 +62,14 @@
 			}
 
 			
-	    	$producto = new Producto();
-			$producto->setImagenProducto($img);	 
-			$producto->setNombre($nombre);			   		    	
+	    	$producto = new Producto();				 
+			$producto->setNombre($nombre);	
+			$producto->setImagenProducto($rutaAux);		   		    	
 	    	$producto->setPrecioProducto($precio);
 			$producto->setEstadoProducto($estado);
 			$producto->setCategoriaProducto($categoria);
 			$producto->setProductocodigo($codigo);
+			
 			
 	    	$resultado = $productoBusiness->insertarProducto($producto);
 
@@ -73,41 +79,39 @@
 	    		header("location: ../view/backend/productoview.php?mensaje=4" );
 	    	}
 			
-		}else if(isset($_POST['id'])){
+		// }else if(isset($_POST['id'])){
 
-			$productoid = $_POST['id'];
-			$productoBusiness = new ProductoBusiness();
-			$resultado = $productoBusiness->getAllTBProductos($productoid);
+		// 	$productoid = $_POST['id'];
+		// 	$productoBusiness = new ProductoBusiness();
+		// 	$resultado = $productoBusiness->getAllTBProductos($productoid);
 	
-			$datos = "";
-			for ($i=0; $i < count($resultado) ; $i++) { 
-				$datos .= "<tr>";
-				$datos .= "<td>".$resultado[$i]['productoid']."</td>";
-				$datos .= "<td>".$resultado[$i]['productoimg']."</td>";
-				$datos .= "<td>".$resultado[$i]['productonombre']."</td>";							
-				$datos .= "<td>".$resultado[$i]['productoprecio']."</td>";
-				$datos .= "<td>".$resultado[$i]['productoestado']."</td>";
-				$datos .= "<td>".$resultado[$i]['productocategoria']."</td>";
-				$datos .= "<td>".$resultado[$i]['productocodigo']."</td>";
-				$datos .= "</tr>";
+		// 	$datos = "";
+		// 	for ($i=0; $i < count($resultado) ; $i++) { 
+		// 		$datos .= "<tr>";
+		// 		$datos .= "<td>".$resultado[$i]['productoid']."</td>";
+		// 		$datos .= "<td>".$resultado[$i]['productoimg']."</td>";
+		// 		$datos .= "<td>".$resultado[$i]['productonombre']."</td>";							
+		// 		$datos .= "<td>".$resultado[$i]['productoprecio']."</td>";
+		// 		$datos .= "<td>".$resultado[$i]['productoestado']."</td>";
+		// 		$datos .= "<td>".$resultado[$i]['productocategoria']."</td>";
+		// 		$datos .= "<td>".$resultado[$i]['productocodigo']."</td>";
+		// 		$datos .= "</tr>";
 				
-			}
-			echo $datos;
+		// 	}
+		// 	echo $datos;
 
 
-		}
+		 }
 	}else if(isset($_POST['actualizar'])){
-		if(isset($_POST['productoimg']) && isset($_POST['productonombre']) && isset($_POST['productoprecio'])
-        && isset($_POST['productoestado']) && isset($_POST['productocategoria'])
+		if(isset($_POST['productonombre']) && isset($_POST['productoprecio'])
+        && isset($_POST['productoestado']) && isset($_POST['productocategoriaid'])
         && isset($_POST['productoid'])){
-			$productoid = $_POST['productoid'];
-			
+			$productoid = $_POST['productoid'];		
             $productonombre = $_POST['productonombre'];			
             $productoprecio = $_POST['productoprecio'];
             $productoestado = $_POST['productoestado'];
-            $productocategoria = $_POST['productocategoria'];
-            $productocodigo = $_POST['productocodigo'];
-			
+            $productocategoriaid = $_POST['productocategoriaid'];
+            $productocodigo = $_POST['productocodigo'];			
 			$ruta = $_POST["imagenActual"];
 			if(isset($_FILES["editarImagen"]["tmp_name"]) && !empty($_FILES["editarImagen"]["tmp_name"])){
 				
@@ -163,14 +167,14 @@
 				}
 
 				$productoBusiness = new ProductoBusiness();
-				$producto = new Producto($productoid,$rutaAux,$productonombre,$productoprecio,$productoestado,$productocategoria,$productocodigo);
+				$producto = new Producto();
 				$producto->setIdProducto($productoid);
-				$producto->setImagenProducto($rutaAux);
 				$producto->setNombre($productonombre);				
                 $producto->setPrecioProducto($productoprecio);
                 $producto->setEstadoProducto($productoestado);
-                $producto->setCategoriaProducto($productocategoria);  
+                $producto->setCategoriaProducto($productocategoriaid);  
 				$producto->setProductocodigo($productocodigo);          
+				$producto->setImagenProducto($rutaAux);
 
 	    		$resultado = $productoBusiness->modificarProducto($producto);
 
@@ -190,10 +194,7 @@
 	}else if(isset($_GET['eliminar'])){
 		$productoid = $_GET['productoid'];
 		$rutaImagen = $_GET['productoimg'];
-		$productonombre = $_GET['productonombre'];
-		$productoprecio = $_GET['productoprecio'];
-		$productoestado = $_GET['productoestado'];
-		$productocategoria = $_GET['productocategoria'];
+	
 		$productocodigo = $_GET['productocodigo'];
 
 
@@ -205,7 +206,7 @@
 		}
 
 		$productoBusiness = new ProductoBusiness();
-		$resultado = $productoBusiness->eliminarProducto($id);
+		$resultado = $productoBusiness->eliminarProducto($productoid);
 
 		if($resultado == 1){
 			header("location: ../view/backend/productoview.php?mensaje=3" );

@@ -1,13 +1,12 @@
-<?php 
-  
-  include '../../business/productobusiness.php';
-  include '../../business/categoriabusiness.php';
-  $productoBusiness = new ProductoBusiness();
-  $productos = $productoBusiness->getAllTBProductos();
-  $categoriabusiness = new Categoriabusiness();
-  $categorias = $categoriabusiness->getAllTBCategorias();
+<?php  
 
-  //var_dump($productos);
+include '../../business/productobusiness.php';
+include '../../business/categoriabusiness.php';
+$productoBusiness = new ProductoBusiness();
+$productos = $productoBusiness->getAllTBProductos();
+$categoriabusiness = new Categoriabusiness();
+$categorias = $categoriabusiness->getAllTBCategorias();
+
 
 ?>
 
@@ -17,7 +16,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SO | Dashboard</title>
+  <title>Productos | Dashboard</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -44,6 +43,13 @@
   <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+   <!-- DataTables -->
+  <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+  <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -53,7 +59,7 @@
     <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
   </div> -->
 
-  <!-- Navbar -->
+  <!-- Navbar --> 
   <?php include 'template/header.php' ?>
   <!-- /.navbar -->
 
@@ -94,7 +100,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
           </li>
 
           <li class="nav-item ">
-            <a href="productoview.php" class="nav-link active">
+            <a href="productoview.php" class="nav-link ">
               <i class="nav-icon fas fa-hamburger"></i>
               <p>
                 Productos
@@ -112,7 +118,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
           </li>
 
            <li class="nav-item ">
-            <a href="categoriaview.php" class="nav-link">
+            <a href="categoriaview.php" class="nav-link active">
               <i class="nav-icon fas fa-list"></i>
               <p>
                 Categorías
@@ -133,7 +139,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                 <a href="usuarioview.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <i class="fas fa-users-cog nav-icon"></i>
-                  <p>Agregar Usuario</p>
+                  <p>Agregar usuario</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -182,19 +188,19 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
           <div class="col-sm-6">
             <h1 class="m-0">Productos</h1>
           </div><!-- /.col -->
-         
+        
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-    <!-- /.content-header --> 
+    <!-- /.content-header -->
 
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-       
-        <!-- /.row -->
+        
+         <!-- /.row -->
         <!-- Main row -->
-       <div class="card">
+        <div class="card">
               <div class="card-header">
                 <div class="box-header with-border">
 
@@ -225,6 +231,8 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                     <?php 
                         foreach($productos as $producto){
                           echo '<tr>';
+                          
+
                           echo '<td>'.$producto['productonombre'].'</td>';
                           
                           echo '<td>'.$producto['productoprecio'].'</td>';
@@ -235,7 +243,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                           
                           echo '<td>'.$producto['productocodigo'].'</td>';
                           echo '<td>';
-                          echo "<div class='btn-group'><button class='btn btn-warning btnEditarProducto' productoid='".$producto["productoid"]."' nombre='".$producto['productonombre']."' precio='".$producto['productoprecio']."' estado='".$producto['productoestado']."' categoria='".$producto['productocategoriaid']."' codigo='".$producto["productocodigo"]."' data-toggle='modal' data-target='#modalEditarProducto'><i class='fa fa-pencil-alt'></i></button><button class='btn btn-danger btnEliminarProducto' productoid='".$producto["productoid"]."' imagen='".$producto["productoimg"]."'><i class='fa fa-times'></i></button></div>";
+                          echo "<div class='btn-group'><button class='btn btn-warning btnEditarProducto' productoid='".$producto["productoid"]."' productoimg='".$producto["productoimg"]."' productonombre='".$producto['productonombre']."' productoprecio='".$producto['productoprecio']."' productoestado='".$producto['productoestado']."' productocategoriaid='".$producto['productocategoriaid']."' productocodigo='".$producto['productocodigo']."' data-toggle='modal' data-target='#modalEditarProducto'><i class='fa fa-pencil-alt'></i></button><button class='btn btn-danger btnEliminarProducto' productoid='".$producto["productoid"]."' productoimg='".$producto["productoimg"]."'><i class='fa fa-times'></i></button></div>";
                           echo '</td>';
                           echo '</tr>';
                         }
@@ -261,6 +269,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 
 
 </div>
+<!-- ./wrapper -->
 
 <div id="modalAgregarProducto" class="modal fade" role="dialog">
   
@@ -280,19 +289,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
           <div class="box-body">
 
             <form method="POST" action="../../business/productoaction.php"  enctype="multipart/form-data">
-              <div class="form-group">
-                
-              <div class="form-group">
-                <label >Imagen: </label>
-                <input type="file" class="nuevaImagen" name="editarImagen">
 
-                <p class="help-block">Peso máximo de la imagen 2MB</p>
-
-                <img src="img/productos/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
-
-              <input type="hidden" name="imagenActual" id="imagenActual">
-
-              </div>
 
               <div class="form-group">
                 <label >Nombre:</label>
@@ -300,7 +297,6 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                
               </div>
 
-             
 
               <div class="form-group">
                 <label >Precio: </label>
@@ -314,26 +310,26 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 
               <div class="form-group">
                 <label >Categoria:</label>
-                <input type="text" class="form-control" name="productocategoria" id="productocategoria" placeholder="Ingrese categoria">
+                <input type="text" class="form-control" name="productocategoriaid" id="productocategoriaid" placeholder="Ingrese categoria">
                
               </div>
 
-                          <div class="form-group">
-                            <label >Código: </label>
-                            <input type="text" class="form-control" name="productocodigo" id="productocodigo" placeholder="Ingrese el codigo">
-                          </div>
-
-
               <div class="form-group">
-                
+                 <label >Código: </label>
+                 <input type="text" class="form-control" name="productocodigo" id="productocodigo" placeholder="Ingrese el codigo">
+               </div>
+
+                 <div class="form-group">
+                <label >Imagen: </label>
+                <input type="file" class="nuevaImagen" name="editarImagen">
+
+                <p class="help-block">Peso máximo de la imagen 2MB</p>
+
+                <img src="img/productos/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
+
+              <input type="hidden" name="imagenActual" id="imagenActual">
 
               </div>
-
-
-
-           
-             
-              
               
               <center><button type="submit" name="insertar" class="btn btn-primary">Insertar</button></center> 
             </form>
@@ -347,7 +343,6 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
   </div>
 
 </div>
-
 
 
 <div id="modalEditarProducto" class="modal fade" role="dialog">
@@ -368,10 +363,10 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
           <div class="box-body">
 
             <form method="POST" action="../../business/productoaction.php"  enctype="multipart/form-data">
+              
               <div class="form-group">
-                
-                <input type="hidden" class="form-control" name="productoid" id="productoid" >
-                <input type="hidden" class="form-control" name="productocodigo" id="productocodigo" >
+                <input type="hidden" name="productoid" id="productoid">
+               
               </div>
 
               <div class="form-group">
@@ -391,22 +386,23 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 
               <div class="form-group">
                 <label >Categoria:</label>
-                <input type="text" class="form-control" name="productocategoria" id="productocategoria" placeholder="Ingrese categoria">
+                <input type="text" class="form-control" name="productocategoriaid" id="productocategoriaid" placeholder="Ingrese categoria">
                
               </div>
-             
-
-            
-
-
+              
+              <div class="form-group">
+                <label >Código:</label>
+                <input type="text" class="form-control" name="productocodigo" id="productocodigo" placeholder="Ingrese codigo">
+               
+              </div>
 
               <div class="form-group">
                 <label >Imagen: </label>
-                <input type="file" class="nuevaImagen" name="editarImagen">
+                  <input type="file" class="nuevaImagen" name="editarImagen">
 
                 <p class="help-block">Peso máximo de la imagen 2MB</p>
 
-                <img src="vistas/img/productos/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
+                <img src="img/productos/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
 
               <input type="hidden" name="imagenActual" id="imagenActual">
 
@@ -420,10 +416,12 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
   </div>
 
 </div>
-</div>
+  </div>
+
 </div>
 
-<!-- ./wrapper -->
+
+
 
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
@@ -457,7 +455,6 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 <script src="dist/js/adminlte.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
-
 <!-- DataTables  & Plugins -->
 <script src="plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -542,22 +539,22 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
   $(".tabla-productos tbody").on("click", "button.btnEditarProducto", function(){
 
     var productoid = $(this).attr("productoid");
-    var productoimg = $(this).attr("productoimg");
-    var productonombre = $(this).attr("productonombre");
-    var productoprecio = $(this).attr("productoprecio");
-    var productoestado = $(this).attr("productoestado");
-    var productocategoria = $(this).attr("productocategoria");
-    var productocodigo =  $(this).attr("productocodigo");
-    alert(img);
+    var img = $(this).attr("imagen");
+    var nombre = $(this).attr("productonombre");
+    var precio = $(this).attr("productoprecio");
+    var estado =  $(this).attr("productoestado");
+    var categoria = $(this).attr("productocategoriaid");
+    var codigo =  $(this).attr("productocodigo");
+
+    alert(productoid);
     $("#modalEditarProducto #productoid").val(productoid);
-    $("#modalEditarProducto #productonombre").val(productonombre);
-    $("#modalEditarProducto #productoprecio").val(productoprecio);
-    $("#modalEditarProducto #productoestado").val(productoestado);
-    $("#modalEditarProducto #productocategoria").val(productocategoria);
-    $("#modalEditarProducto #productocodigo").val(productocodigo);
-    $("#modalEditarProducto #imagenActual").val(productoimg);
-    $("#modalEditarProducto .previsualizar").attr("src", productoimg);
-  
+    $("#modalEditarProducto #productonombre").val(nombre);
+    $("#modalEditarProducto #productoprecio").val(precio);
+    $("#modalEditarProducto #productoestado").val(estado);
+    $("#modalEditarProducto #productocategoriaid").val(categoria);
+    $("#modalEditarProducto #productocodigo").val(codigo);
+    $("#modalEditarProducto #imagenActual").val(img);
+    $("#modalEditarProducto .previsualizar").attr("src", img);
 
 });
 
@@ -565,12 +562,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 $(".tabla-productos tbody").on("click", "button.btnEliminarProducto", function(){
 
   var productoid = $(this).attr("productoid");
-  var productoimg = $(this).attr("productoimg");
-  var productonombre = $(this).attr("productonombre");
-  var productoprecio = $(this).attr("productoprecio");
-  var productoestado = $(this).attr("productoestado");
-  var productocategoria = $(this).attr("productocategoria");
-  var productocodigo = $(this).attr("productocodigo");
+ alert(productoid);
 //   var Toast = Swal.mixin({
 //       toast: true,
 //       position: 'top-end',
@@ -592,18 +584,11 @@ $(".tabla-productos tbody").on("click", "button.btnEliminarProducto", function()
         confirmButtonText: 'Eliminar'
         }).then((result) => {
           if (result.isConfirmed) {
-            window.location = "../../business/productoaction.php?eliminar=true&productoid="+productoid+"&productoimg="+productoimg+"&productonombre="+productonombre
-            +"&productoestado="+productoestado+"&productocategoria="+productocategoria+"&productocodigo="+productocodigo;
-            // Swal.fire(
-            //   'Deleted!',
-            //   'Your file has been deleted.',
-            //   'success'
-            // )
+            window.location = "../../business/productoaction.php?eliminar=true&productoid="+productoid;
+          
           }
     })
-  //alert(categoriaid);
-  //Con esto se puede redireccionar al action
-  //window.location = "test.php?productonombre="+idProducto;
+
 
 });
 

@@ -50,17 +50,17 @@
 	                
 	        if($row = $max->fetch()){
 	           $nextId = $row[0]+1;
-	        }
-	        
-            $img = $producto->getImagenProducto();
-	        $nombre = $producto->getNombreProducto();	        
+	        } 
+	                    
+	        $nombre = $producto->getNombreProducto();
+            $imagen = $producto->getImagenProducto();	        
             $precio = $producto->getPrecioProducto();
             $estado = $producto->getEstadoProducto();
             $categoria = $producto->getCategoriaProducto();
             $codigo = $producto->getProductocodigo();
             $stm ->bindParam(1,$nextId,PDO::PARAM_INT);
-            $stm ->bindParam(2,$img,PDO::PARAM_STR);
-            $stm ->bindParam(3,$nombre,PDO::PARAM_STR);          
+            $stm ->bindParam(2,$nombre,PDO::PARAM_STR);
+            $stm ->bindParam(3,$imagen,PDO::PARAM_STR);          
             $stm ->bindParam(4,$precio,PDO::PARAM_INT);
             $stm ->bindParam(5,$estado,PDO::PARAM_INT);
             $stm ->bindParam(6,$categoria,PDO::PARAM_INT);
@@ -103,14 +103,14 @@
             $productonombre = $producto->getNombreProducto();
             $productoprecio = $producto->getPrecioProducto();
             $productoestado = $producto->getEstadoProducto();
-            $productocategoria = $producto->getCategoriaProducto();
+            $productocategoriaid = $producto->getCategoriaProducto();
             $productocodigo = $producto->getProductocodigo();
             $stm ->bindParam(1,$productoid,PDO::PARAM_INT);
-            $stm ->bindParam(2,$productonombre,PDO::PARAM_STR);
-            $stm ->bindParam(3,$productoimg,PDO::PARAM_STR);           
+            $stm ->bindParam(2,$productoimg,PDO::PARAM_STR);
+            $stm ->bindParam(3,$productonombre,PDO::PARAM_STR);           
             $stm ->bindParam(4,$productoprecio,PDO::PARAM_INT);
             $stm ->bindParam(5,$productoestado,PDO::PARAM_INT);
-            $stm ->bindParam(6,$productocategoria,PDO::PARAM_INT);
+            $stm ->bindParam(6,$productocategoriaid,PDO::PARAM_INT);
             $stm ->bindParam(7,$productocodigo,PDO::PARAM_INT);
             $resultado = $stm->execute();
             Database::desconectar();
@@ -132,18 +132,19 @@
 
     }
 
-    // $data = new ProductoData();
- // $pro = new Producto();
+ // $data = new ProductoData();
+  // $pro = new Producto();
 
 
-
-// $pro->setImagenProducto("fdfgg");
- //$pro->setNombre("pinto");
- //$pro->setPrecioProducto(456);
- //$pro->setEstadoProducto(7);
- //$pro->setCategoriaProducto(9);
- //$pro->setProductocodigo(2);
- //echo $data->insertarProducto($pro);
+   //$pro->setImagenProducto("img/productos/3/661.png");
+ // $pro->setNombre("pinto");
+ 
+ // $pro->setPrecioProducto(456);
+//  $pro->setEstadoProducto(7);
+ // $pro->setCategoriaProducto(9);
+  //$pro->setProductocodigo(2);
+  
+  //echo $data->insertarProducto($pro);
  //$pro->setIdProducto(2);
  //$pro->setNombre("pinto");
 //$pro->setImagenProducto("test");

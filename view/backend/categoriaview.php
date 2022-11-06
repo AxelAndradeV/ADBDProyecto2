@@ -524,16 +524,10 @@ $(".tabla-categorias tbody").on("click", "button.btnEliminarCategoria", function
         }).then((result) => {
           if (result.isConfirmed) {
             window.location = "../../business/categoriaaction.php?eliminar=true&id="+categoriaid+"&imagen="+imagen+"&codigo="+codigo;
-            // Swal.fire(
-            //   'Deleted!',
-            //   'Your file has been deleted.',
-            //   'success'
-            // )
+          
           }
     })
-  //alert(categoriaid);
-  //Con esto se puede redireccionar al action
-  //window.location = "test.php?productonombre="+idProducto;
+
 
 });
 

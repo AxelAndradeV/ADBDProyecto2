@@ -34,9 +34,8 @@
 			
 		
 	}else if(isset($_POST['actualizar'])){
-		if(isset($_POST['usuarionombre']) && isset($_POST['usuariotelefono']) && isset($_POST['usuariocorreo'])
-        && isset($_POST['usuariopassword'])
-        && isset($_POST['tipoid'])&& isset($_POST['usuarioid'])){
+		if(isset($_POST['usuarioid']) && isset($_POST['usuarionombre']) && isset($_POST['usuariotelefono']) && isset($_POST['usuariocorreo'])
+        && isset($_POST['usuariopassword']) && isset($_POST['tipoid'])){
 			$id = $_POST['usuarioid'];
 			$nombre = $_POST['usuarionombre'];
 			$telefono = $_POST['usuariotelefono'];

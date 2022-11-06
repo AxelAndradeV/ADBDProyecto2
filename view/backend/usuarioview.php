@@ -243,7 +243,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                          
                           echo '<td>'.$usuario['tipoid'].'</td>';
                           echo '<td>';
-                          echo "<div class='btn-group'><button class='btn btn-warning btnEditarUsuario' id='".$usuario["usuarioid"]."' telefono='".$usuario['usuariotelefono']."'  correo='".$usuario["usuariocorreo"]."' password='".$usuario["usuariopassword"]."' tipoid='".$usuario["tipoid"]."' data-toggle='modal' data-target='#modalEditarUsuario'><i class='fa fa-pencil-alt'></i></button><button class='btn btn-danger btnEliminarUsuario' id='".$usuario["usuarioid"]."' telefono='".$usuario["usuariotelefono"]."' correo='".$usuario["usuariocorreo"]."' password='".$usuario["usuariopassword"]."' tipoid='".$usuario["tipoid"]."' ><i class='fa fa-times'></i></button></div>";
+                          echo "<div class='btn-group'><button class='btn btn-warning btnEditarUsuario' usuarioid='".$usuario["usuarioid"]."' usuarionombre='".$usuario['usuarionombre']."' usuariotelefono='".$usuario['usuariotelefono']."'  usuariocorreo='".$usuario["usuariocorreo"]."' usuariopassword='".$usuario["usuariopassword"]."' tipoid='".$usuario["tipoid"]."' data-toggle='modal' data-target='#modalEditarUsuario'><i class='fa fa-pencil-alt'></i></button><button class='btn btn-danger btnEliminarUsuario' usuarioid='".$usuario["usuarioid"]."' usuariotelefono='".$usuario["usuariotelefono"]."' usuariocorreo='".$usuario["usuariocorreo"]."' usuariopassword='".$usuario["usuariopassword"]."' tipoid='".$usuario["tipoid"]."' ><i class='fa fa-times'></i></button></div>";
                           echo '</td>';
                           echo '</tr>';
                         }
@@ -340,7 +340,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
     <div class="modal-content">
 
         <div class="modal-header">
-          <h4 class="modal-title">Editar usuario</h4>
+          <h4 class="modal-title">Editar Usuario</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -525,17 +525,17 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
   $(".tabla-usuarios tbody").on("click", "button.btnEditarUsuario", function(){
 
     var usuarioid = $(this).attr("usuarioid");
-    var nombre = $(this).attr("usuarionombre");
-    var telefono = $(this).attr("usuariotelefono");
-    var correo =  $(this).attr("usuariocorreo");
-    var password = $(this).attr("usuariopassword");
+    var usuarionombre = $(this).attr("usuarionombre");
+    var usuariotelefono = $(this).attr("usuariotelefono");
+    var usuariocorreo =  $(this).attr("usuariocorreo");
+    var usuariopassword = $(this).attr("usuariopassword");
     var tipoid =  $(this).attr("tipoid");
-    alert(usu);
+    alert(usuarioid);
     $("#modalEditarUsuario #usuarioid").val(usuarioid);
-    $("#modalEditarUsuario #usuarionombre").val(nombre);
-    $("#modalEditarUsuario #usuariotelefono").val(telefono);
-    $("#modalEditarUsuario #usuariocorreo").val(correo);
-    $("#modalEditarUsuario #usuariopassword").val(password);
+    $("#modalEditarUsuario #usuarionombre").val(usuarionombre);
+    $("#modalEditarUsuario #usuariotelefono").val(usuariotelefono);
+    $("#modalEditarUsuario #usuariocorreo").val(usuariocorreo);
+    $("#modalEditarUsuario #usuariopassword").val(usuariopassword);
     $("#modalEditarUsuario #tipoid").val(tipoid);
   
 
@@ -545,7 +545,8 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 $(".tabla-usuarios tbody").on("click", "button.btnEliminarUsuario", function(){
 
   var usuarioid = $(this).attr("usuarioid");
- 
+  //aquiii??
+  alert(usuarioid);
  Swal.fire({
        title: '¿Desea eliminar el usuario?',
        text: "No se podrá revertir el cambio",
@@ -557,7 +558,7 @@ $(".tabla-usuarios tbody").on("click", "button.btnEliminarUsuario", function(){
        confirmButtonText: 'Eliminar'
        }).then((result) => {
          if (result.isConfirmed) {
-           window.location = "../../business/usuarioaction.php?eliminar=true&id="+usuarioid;
+           window.location = "../../business/usuarioaction.php?eliminar=true&usuarioid="+usuarioid;
     
          }
    })
