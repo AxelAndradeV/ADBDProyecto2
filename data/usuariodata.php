@@ -43,7 +43,7 @@
 	        $telefono = $usuario->getTelefono();
 	        $correo = $usuario->getCorreo();
 			$password = $usuario->getPassword();
-	        $tipoid = $usuario->getTipoId();
+	        $tipoid = $usuario->getTipoid();
             $stm ->bindParam(1,$nextId,PDO::PARAM_INT);
             $stm ->bindParam(2,$nombre,PDO::PARAM_STR);
 			$stm ->bindParam(3,$telefono,PDO::PARAM_INT);
@@ -64,7 +64,7 @@
 	        $telefono = $usuario->getTelefono();
 			$correo = $usuario->getCorreo();
             $password = $usuario->getPassword();
-	        $tipoid = $usuario->getTipoId();
+	        $tipoid = $usuario->getTipoid();
             $stm ->bindParam(1,$id,PDO::PARAM_INT);
             $stm ->bindParam(2,$nombre,PDO::PARAM_STR);
             $stm ->bindParam(3,$telefono,PDO::PARAM_INT);
@@ -77,10 +77,10 @@
 	        return $resultado;
 		}
 		//eliminar
-		public function eliminarusuario($id){
+		public function eliminarusuario($usuarioid){
 			$pdo = Database::conectar();
             $stm = $pdo->prepare("CALL eliminarUsuario(?)");
-            $stm ->bindParam(1,$id,PDO::PARAM_INT);
+            $stm ->bindParam(1,$usuarioid,PDO::PARAM_INT);
             $resultado = $stm->execute();
             Database::desconectar();
 	           
@@ -97,7 +97,18 @@
         }
 	}
 
+//      $data = new UsuarioData();
+//   $u = new usuario();
 
+
+
+// $u->setNombre("hoy");
+// $u->setTelefono(67676767);
+// $u->setCorreo("mio");
+// $u->setPassword(9);
+// $u->setTipoid(6);
+
+//  echo $data->insertarusuario($u);
 
 
   ?>

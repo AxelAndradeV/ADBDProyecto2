@@ -22,7 +22,7 @@
     		return $this->usuarioData->insertarUsuario($usuario);
     	}
     	public function modificarusuario($usuario){
-    		return $this->usuarioData->modificarusuario($usuario);
+    		return $this->usuarioData->modificarUsuario($usuario);
     	}
     	public function eliminarusuario($id){
     		return $this->usuarioData->eliminarusuario($id);

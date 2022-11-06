@@ -243,7 +243,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                          
                           echo '<td>'.$usuario['tipoid'].'</td>';
                           echo '<td>';
-                          echo "<div class='btn-group'><button class='btn btn-warning btnEditarUsuario' id='".$usuario["usuarioid"]."' telefono='".$usuario['usuariotelefono']."'  correo='".$usuario["usuariocorreo"]."' password='".$usuario["usuariopassword"]."' tipoid='".$usuario["tipoid"]."' data-toggle='modal' data-target='#modalEditarUsuario'><i class='fa fa-pencil-alt'></i></button><button class='btn btn-danger btnEliminarusuario' id='".$usuario["usuarioid"]."' telefono='".$usuario["usuariotelefono"]."' correo='".$usuario["usuariocorreo"]."' password='".$usuario["usuariopassword"]."' tipoid='".$usuario["tipoid"]."' ><i class='fa fa-times'></i></button></div>";
+                          echo "<div class='btn-group'><button class='btn btn-warning btnEditarUsuario' id='".$usuario["usuarioid"]."' telefono='".$usuario['usuariotelefono']."'  correo='".$usuario["usuariocorreo"]."' password='".$usuario["usuariopassword"]."' tipoid='".$usuario["tipoid"]."' data-toggle='modal' data-target='#modalEditarUsuario'><i class='fa fa-pencil-alt'></i></button><button class='btn btn-danger btnEliminarUsuario' id='".$usuario["usuarioid"]."' telefono='".$usuario["usuariotelefono"]."' correo='".$usuario["usuariocorreo"]."' password='".$usuario["usuariopassword"]."' tipoid='".$usuario["tipoid"]."' ><i class='fa fa-times'></i></button></div>";
                           echo '</td>';
                           echo '</tr>';
                         }
@@ -299,7 +299,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
               
               <div class="form-group">
                 <label >Telefono:</label>
-                <input type="text" class="form-control" name="usuariotelefono" id="usuariotelefono" placeholder="Ingrese un telefono">
+                <input type="number" class="form-control" name="usuariotelefono" id="usuariotelefono" placeholder="Ingrese un telefono">
                
               </div>
               <div class="form-group">
@@ -314,7 +314,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
               </div>
               <div class="form-group">
                 <label >Tipo:</label>
-                <input type="text" class="form-control" name="usuariotipoid" id="usuariotipoid" placeholder="Ingrese un tipo">
+                <input type="number" class="form-control" name="usuariotipoid" id="usuariotipoid" placeholder="Ingrese un tipo">
                
               </div>
 
@@ -387,7 +387,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
               
               <div class="form-group">
                 <label >Tipo de usuario:</label>
-                <input type="text" class="form-control" name="tipoid" id="tipoid" placeholder="Ingrese el tipo">
+                <input type="text" class="form-control" name="tipoid" id="tipoid"  placeholder="Ingrese el tipo " >
                
               </div>
               
@@ -524,14 +524,14 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 <script>
   $(".tabla-usuarios tbody").on("click", "button.btnEditarUsuario", function(){
 
-    var id = $(this).attr("usuarioid");
+    var usuarioid = $(this).attr("usuarioid");
     var nombre = $(this).attr("usuarionombre");
     var telefono = $(this).attr("usuariotelefono");
     var correo =  $(this).attr("usuariocorreo");
     var password = $(this).attr("usuariopassword");
     var tipoid =  $(this).attr("tipoid");
     alert(usu);
-    $("#modalEditarUsuario #usuarioid").val(id);
+    $("#modalEditarUsuario #usuarioid").val(usuarioid);
     $("#modalEditarUsuario #usuarionombre").val(nombre);
     $("#modalEditarUsuario #usuariotelefono").val(telefono);
     $("#modalEditarUsuario #usuariocorreo").val(correo);
@@ -544,42 +544,24 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
   
 $(".tabla-usuarios tbody").on("click", "button.btnEliminarUsuario", function(){
 
-  var id = $(this).attr("usuarioid");
-  var nombre = $(this).attr("usuarionombre");
-  var telefono = $(this).attr("usuariotelefono");
-  var correo = $(this).attr("usuariocorreo");
-  var password = $(this).attr("usuariopassword");
-  var tipoid = $(this).attr("tipoid");
-//   var Toast = Swal.mixin({
-//       toast: true,
-//       position: 'top-end',
-//       showConfirmButton: false,
-//       timer: 3000
-//     });
-// Toast.fire({
-//         icon: 'success',
-//         title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-//       });
-      Swal.fire({
-        title: '¿Desea eliminar el usuario?',
-        text: "No se podrá revertir el cambio",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-         cancelButtonText: "Cancelar",
-        confirmButtonText: 'Eliminar'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            window.location = "../../business/usuarioaction.php?eliminar=true&id="+id+"&nombre="+nombre+"&telefono="+telefono+"&correo="+correo+"&password="+password+"&tipoid="+tipoid;
-            // Swal.fire(
-            //   'Deleted!',
-            //   'Your file has been deleted.',
-            //   'success'
-            // )
-          }
-    })
-  
+  var usuarioid = $(this).attr("usuarioid");
+ 
+ Swal.fire({
+       title: '¿Desea eliminar el usuario?',
+       text: "No se podrá revertir el cambio",
+       icon: 'warning',
+       showCancelButton: true,
+       confirmButtonColor: '#3085d6',
+       cancelButtonColor: '#d33',
+        cancelButtonText: "Cancelar",
+       confirmButtonText: 'Eliminar'
+       }).then((result) => {
+         if (result.isConfirmed) {
+           window.location = "../../business/usuarioaction.php?eliminar=true&id="+usuarioid;
+    
+         }
+   })
+
 
 });
 

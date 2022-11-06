@@ -20,7 +20,7 @@
 			$usuario->setTelefono($telefono);			   		    	
 	    	$usuario->setCorreo($correo);
 			$usuario->setPassword($password);
-			$usuario->setTipoId($tipoid);
+			$usuario->setTipoid($tipoid);
 			
 			
 	    	$resultado = $usuarioBusiness->insertarusuario($usuario);
@@ -36,23 +36,24 @@
 	}else if(isset($_POST['actualizar'])){
 		if(isset($_POST['usuarionombre']) && isset($_POST['usuariotelefono']) && isset($_POST['usuariocorreo'])
         && isset($_POST['usuariopassword'])
-        && isset($_POST['usuariotipoid'])){
+        && isset($_POST['tipoid'])&& isset($_POST['usuarioid'])){
 			$id = $_POST['usuarioid'];
 			$nombre = $_POST['usuarionombre'];
 			$telefono = $_POST['usuariotelefono'];
             $correo = $_POST['usuariocorreo'];
             $password = $_POST['usuariopassword'];
-            $tipoid = $_POST['usuariotipoid'];
+            $tipoid = $_POST['tipoid'];
 			
 
 				$usuarioBusiness = new UsuarioBusiness();
-				$usuario = new Usuario();
+				$usuario = new Usuario(); 
 				$usuario->setId($id);
 				$usuario->setNombre($nombre);
 	    		$usuario->setTelefono($telefono);
                 $usuario->setCorreo($correo);
                 $usuario->setPassword($password);
-                $usuario->setTipoId($tipoid);
+                $usuario->setTipoid($tipoid);
+				
 	    		$resultado = $usuarioBusiness->modificarusuario($usuario);
 
 	    		if($resultado == 1){
@@ -67,11 +68,6 @@
 
 	} else if(isset($_GET['eliminar'])){
 		$id = $_GET['usuarioid'];
-	
-	
-
-
-		
 		$usuarioBusiness = new UsuarioBusiness();
 		$resultado = $usuarioBusiness->eliminarusuario($id);
 
