@@ -239,7 +239,13 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                           
                           echo '<td>'.$producto['productoestado'].'</td>';
                           
-                          echo '<td>'.$producto['productocategoriaid'].'</td>';
+                          if($producto['productocategoriaid'] == 1){
+                            echo '<td><span class="badge badge-success">Bebidas</span></td>';
+                          }else if($producto['productocategoriaid'] == 2){
+                            echo '<td><span class="badge badge-warning">Comidas</span></td>';
+                          }else if($producto['productocategoriaid'] == 3){
+
+                          }
                           
                           echo '<td>'.$producto['productocodigo'].'</td>';
                           echo '<td>';
@@ -302,17 +308,25 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                 <label >Precio: </label>
                 <input type="text" class="form-control" name="productoprecio" id="productoprecio" placeholder="Ingrese precio">
               </div>
-
-              <div class="form-group">
+ 
+             <div class="form-group">
                 <label >Estado: </label>
                 <input type="text" class="form-control" name="productoestado" id="productoestado" placeholder="Ingrese el eatado">
-              </div>
+              </div> 
 
-              <div class="form-group">
+              <select class="productocategoriaid" name="productocategoriaid" id="productocategoriaid">
+
+                  <option selected >Seleccione la categoría</option>
+                  <option value="2" class="badge badge-pill badge-warning" style="font-size: 15px;">Bebidas</option>
+                  <option value="1" style="font-size: 15px;" class="badge badge-pill badge-success">Comidas</option>
+                  
+                </select>
+
+              <!-- <div class="form-group">
                 <label >Categoria:</label>
                 <input type="text" class="form-control" name="productocategoriaid" id="productocategoriaid" placeholder="Ingrese categoria">
                
-              </div>
+              </div> -->
 
               <div class="form-group">
                  <label >Código: </label>
@@ -555,9 +569,52 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
     $("#modalEditarProducto #productocodigo").val(codigo);
     $("#modalEditarProducto #imagenActual").val(img);
     $("#modalEditarProducto .previsualizar").attr("src", img);
+   
+    
+
+});
+ 
+$("#btnAgregar").on("click", function($id){
+
+var productocategoriaid = $(this).attr("productocategoriaid");
+
+$("#modalAgregarProducto #productocategoriaid").val(productocategoriaid);
+if(productocategoriaid == 1){
+  $("#modalAgregarProducto #productocategoriaid").val('1');
+}else if(productocategoriaid == 2){
+  $("#modalAgregarProducto #productocategoriaid").val('2'); 
+}
+
+
+
 
 });
 
+$(".tabla-productos tbody").on("click", "button.btnAgregarProducto", function(){
+    $("#categorias").empty();
+    var categoriaid = $(this).attr("categoriaid");
+    $("#modalAgregarProducto #categoriaid").val(categoriaid);
+    var datos = {categoriaid: "obtenerCategorias=true"};
+    console.log(datos);
+  
+    $.ajax({
+
+              url:"../../business/productoaction.php",
+              method: "POST",
+              data: datos,
+              
+              success:function(respuesta){
+                  
+                  console.log(respuesta);
+                  $("#categorias").append(respuesta);
+
+              }
+
+    });
+
+  
+
+});
   
 $(".tabla-productos tbody").on("click", "button.btnEliminarProducto", function(){
 

@@ -79,26 +79,19 @@
 	    		header("location: ../view/backend/productoview.php?mensaje=4" );
 	    	}
 			
-		// }else if(isset($_POST['id'])){
+		}else if(isset($_POST['id'])){
 
-		// 	$productoid = $_POST['id'];
-		// 	$productoBusiness = new ProductoBusiness();
-		// 	$resultado = $productoBusiness->getAllTBProductos($productoid);
+			$categoriaid = $_POST['id'];
+			$categoriaBusiness = new CategoriaBusiness();
+			$resultado = $categoriaBusiness->getAllTBCategorias($categoriaid);
 	
-		// 	$datos = "";
-		// 	for ($i=0; $i < count($resultado) ; $i++) { 
-		// 		$datos .= "<tr>";
-		// 		$datos .= "<td>".$resultado[$i]['productoid']."</td>";
-		// 		$datos .= "<td>".$resultado[$i]['productoimg']."</td>";
-		// 		$datos .= "<td>".$resultado[$i]['productonombre']."</td>";							
-		// 		$datos .= "<td>".$resultado[$i]['productoprecio']."</td>";
-		// 		$datos .= "<td>".$resultado[$i]['productoestado']."</td>";
-		// 		$datos .= "<td>".$resultado[$i]['productocategoria']."</td>";
-		// 		$datos .= "<td>".$resultado[$i]['productocodigo']."</td>";
-		// 		$datos .= "</tr>";
+			$datos = "";
+			foreach ($resultado as $dato) { 
 				
-		// 	}
-		// 	echo $datos;
+				$datos .= "<option>".$dato['categoriaid']."</option>";			
+				
+			}
+			echo $datos;
 
 
 		 }
