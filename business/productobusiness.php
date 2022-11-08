@@ -21,6 +21,7 @@ class ProductoBusiness{
     }
 
     public function insertarProducto($producto){
+      
         return $this->productoData->insertarProducto($producto);
     }
 

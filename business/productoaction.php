@@ -1,7 +1,7 @@
 <?php 	 
 	
 	include 'productobusiness.php';
-
+	//var_dump($_FILES["nuevaImagen"]["tmp_name"]);
 	if(isset($_POST['insertar'])){
 		if(isset($_POST['productonombre'])
 		&&isset($_POST['productoprecio']) && isset($_POST['productoestado'])
@@ -14,6 +14,7 @@
 			$estado = $_POST['productoestado'];
 			$categoria = $_POST['productocategoriaid'];
 			$codigo = $_POST['productocodigo'];
+			
 			
 
 			if(isset($_FILES["nuevaImagen"]["tmp_name"])){
@@ -30,7 +31,7 @@
 				 if($_FILES["nuevaImagen"]["type"] == "image/jpeg"){
 
 
-				     $img = $directorio."/".$aleatorio.".jpg";
+				     $ruta = $directorio."/".$aleatorio.".jpg";
 				     $rutaAux = "img/productos/".$codigo."/".$aleatorio.".jpg";
 				     $origen = imagecreatefromjpeg($_FILES["nuevaImagen"]["tmp_name"]);      
 
@@ -44,7 +45,7 @@
 
 			    if($_FILES["nuevaImagen"]["type"] == "image/png"){
 
-
+					echo "entro";
 				     $ruta = $directorio."/".$aleatorio.".png";
 				     $rutaAux = "img/productos/".$codigo."/".$aleatorio.".png";
 
@@ -61,7 +62,7 @@
 	    		
 			}
 
-			
+		
 	    	$producto = new Producto();				 
 			$producto->setNombre($nombre);	
 			$producto->setImagenProducto($rutaAux);		   		    	
@@ -72,6 +73,7 @@
 			
 			
 	    	$resultado = $productoBusiness->insertarProducto($producto);
+
 
 	    	if($resultado == 1){
 	    		header("location: ../view/backend/productoview.php?mensaje=1" );

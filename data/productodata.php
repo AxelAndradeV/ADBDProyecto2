@@ -52,7 +52,7 @@
 	        if($row = $max->fetch()){
 	           $nextId = $row[0]+1;
 	        } 
-	                    
+	             var_dump($producto->getImagenProducto());     
 	        $nombre = $producto->getNombreProducto();
             $imagen = $producto->getImagenProducto();	        
             $precio = $producto->getPrecioProducto();
