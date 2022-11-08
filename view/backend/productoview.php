@@ -399,9 +399,13 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
               </div>
 
               <div class="form-group">
-                <label >Categoria:</label>
-                <input type="text" class="form-control" name="productocategoriaid" id="productocategoriaid" placeholder="Ingrese categoria">
-               
+              <label class="input-group-text" >Categoria</label>
+              <select class="productocategoriaid" name="productocategoriaid" id="productocategoriaid">
+
+              <option selected >Seleccionar Categoría</option>
+              <option value="2" class="badge badge-pill badge-warning" style="font-size: 15px;">Bebidas</option>
+              <option value="1" style="font-size: 15px;" class="badge badge-pill badge-success">Comidas</option>
+              </select>
               </div>
               
               <div class="form-group">
@@ -557,7 +561,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
     var nombre = $(this).attr("productonombre");
     var precio = $(this).attr("productoprecio");
     var estado =  $(this).attr("productoestado");
-    var categoria = $(this).attr("productocategoriaid");
+    var productocategoriaid = $(this).attr("productocategoriaid");
     var codigo =  $(this).attr("productocodigo");
 
     alert(productoid);
@@ -565,71 +569,67 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
     $("#modalEditarProducto #productonombre").val(nombre);
     $("#modalEditarProducto #productoprecio").val(precio);
     $("#modalEditarProducto #productoestado").val(estado);
-    $("#modalEditarProducto #productocategoriaid").val(categoria);
+    if(productocategoriaid == 1){
+      $("#btnEditarProducto #productocategoriaid").val('1');
+    }else if(productocategoriaid == 2){
+      $("#btnEditarProducto #productocategoriaid").val('2'); 
+    }
     $("#modalEditarProducto #productocodigo").val(codigo);
     $("#modalEditarProducto #imagenActual").val(img);
     $("#modalEditarProducto .previsualizar").attr("src", img);
+   
    
     
 
 });
  
-$("#btnAgregar").on("click", function($id){
+// $("#btnAgregar").on("click", function($id){
 
-var productocategoriaid = $(this).attr("productocategoriaid");
+// var productocategoriaid = $(this).attr("productocategoriaid");
 
-$("#modalAgregarProducto #productocategoriaid").val(productocategoriaid);
-if(productocategoriaid == 1){
-  $("#modalAgregarProducto #productocategoriaid").val('1');
-}else if(productocategoriaid == 2){
-  $("#modalAgregarProducto #productocategoriaid").val('2'); 
-}
-
-
+// $("#modalAgregarProducto #productocategoriaid").val(productocategoriaid);
+// if(productocategoriaid == 1){
+//   $("#modalAgregarProducto #productocategoriaid").val('1');
+// }else if(productocategoriaid == 2){
+//   $("#modalAgregarProducto #productocategoriaid").val('2'); 
+// }
 
 
-});
 
-$(".tabla-productos tbody").on("click", "button.btnAgregarProducto", function(){
-    $("#categorias").empty();
-    var categoriaid = $(this).attr("categoriaid");
-    $("#modalAgregarProducto #categoriaid").val(categoriaid);
-    var datos = {categoriaid: "obtenerCategorias=true"};
-    console.log(datos);
+
+// });
+
+// $(".tabla-productos tbody").on("click", "button.btnAgregarProducto", function(){
+//     $("#categorias").empty();
+//     var categoriaid = $(this).attr("categoriaid");
+//     $("#modalAgregarProducto #categoriaid").val(categoriaid);
+//     var datos = {categoriaid: "obtenerCategorias=true"};
+//     console.log(datos);
   
-    $.ajax({
+//     $.ajax({
 
-              url:"../../business/productoaction.php",
-              method: "POST",
-              data: datos,
+//               url:"../../business/productoaction.php",
+//               method: "POST",
+//               data: datos,
               
-              success:function(respuesta){
+//               success:function(respuesta){
                   
-                  console.log(respuesta);
-                  $("#categorias").append(respuesta);
+//                   console.log(respuesta);
+//                   $("#categorias").append(respuesta);
 
-              }
+//               }
 
-    });
+//     });
 
   
 
-});
+//});
   
 $(".tabla-productos tbody").on("click", "button.btnEliminarProducto", function(){
 
   var productoid = $(this).attr("productoid");
  alert(productoid);
-//   var Toast = Swal.mixin({
-//       toast: true,
-//       position: 'top-end',
-//       showConfirmButton: false,
-//       timer: 3000
-//     });
-// Toast.fire({
-//         icon: 'success',
-//         title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-//       });
+
       Swal.fire({
         title: '¿Desea eliminar el producto?',
         text: "No se podrá revertir el cambio",

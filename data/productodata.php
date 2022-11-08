@@ -4,6 +4,7 @@
         include ("../domain/producto.php");
     }else{
         include ("../../domain/producto.php");
+    
     }
 	//include '../../domain/producto.php';
 
