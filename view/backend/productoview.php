@@ -582,11 +582,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
       $("#modalEditarProducto #productoprecio").val(precio);
       $("#modalEditarProducto #productoestado").val(estado);
       $("#modalEditarProducto #productocategoriaid").val(productocategoriaid);
-      // if (productocategoriaid == 1) {
-      //   $("#btnEditarProducto #productocategoriaid").val('1');
-      // } else if (productocategoriaid == 2) {
-      //   $("#btnEditarProducto #productocategoriaid").val('2');
-      // }
+     
       $("#modalEditarProducto #productocodigo").val(codigo);
       $("#modalEditarProducto #imagenActual").val(img);
       $("#modalEditarProducto .previsualizar").attr("src", img);
