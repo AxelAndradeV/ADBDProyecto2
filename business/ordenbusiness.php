@@ -46,13 +46,6 @@ class OrdenBusiness{
 		return $this->ordenData->getAllTBDetalles($ordenid);
 	}
 
-	 public function getTotalOrdenes(){
-        return $this->ordenData->getTotalOrdenes();
-    }
-    public function getTotalGanancias(){
-        return $this->ordenData->getTotalGanancias();
-   }
-
 }
 
 

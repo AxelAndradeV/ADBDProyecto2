@@ -129,22 +129,6 @@
             return $stm->fetchAll(PDO::FETCH_ASSOC);
          }
 
-         public function getTotalOrdenes() {
-            $pdo = Database::conectar();
-            $stm = $pdo->prepare("CALL obtenerTotalOrdenes ()");
-            $stm->execute();
-            Database::desconectar();
-            return $stm->fetchAll(PDO::FETCH_ASSOC);
-         }
-
-         public function getTotalGanancias(){
-         	$pdo = Database::conectar();
-            $stm = $pdo->prepare("CALL obtenerTotalGanancias ()");
-            $stm->execute();
-            Database::desconectar();
-            return $stm->fetchAll(PDO::FETCH_ASSOC);
-         }
-
          public function eliminarOrden($id){
 			$pdo = Database::conectar();
             $stm = $pdo->prepare("CALL eliminarOrden(?)");

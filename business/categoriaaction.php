@@ -43,8 +43,6 @@
 				     $origen = imagecreatefrompng($_FILES["nuevaImagen"]["tmp_name"]);      
 
 				     $destino = imagecreatetruecolor(160, 160);
-				      imagealphablending($destino, false);
-				     imagesavealpha($destino, true);
 
 				     imagecopyresized($destino, $origen, 0, 0, 0, 0,160, 160, $ancho, $alto);
 

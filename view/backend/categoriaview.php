@@ -1,5 +1,5 @@
 <?php  
- 
+
     include '../../business/categoriabusiness.php';
 
     // if (is_file("../../business/categoriabusiness.php")){

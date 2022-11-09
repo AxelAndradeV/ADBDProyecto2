@@ -41,9 +41,9 @@
 
 		if($ordeninsertada == 1){
 			unset($_SESSION['carrito']);
-			header("location: ../view/frontend/index.php?pagina=1&mensaje=2&ordenid=".$ordenultimoid );
+			header("location: ../view/frontend/index.php" );
 		}else{
-			header("location: ../view/frontend/index.php?pagina=1&mensaje=3" );
+			header("location: ../view/frontend/carritoview.php" );
 		}
 		// echo $total;
 	}else if(isset($_POST['id'])){

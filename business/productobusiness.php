@@ -20,15 +20,9 @@ class ProductoBusiness{
     	return $this->productoData->getTotalProductos();
     }
 
-
     public function insertarProducto($producto){
       
         return $this->productoData->insertarProducto($producto);
-    }
-
-
-    public function getTotalProductosCategoria($categoriaid){
-        return $this->productoData->getTotalProductosCategoria($categoriaid);
     }
 
     public function getPaginasProducto($inicio, $cantidad){
@@ -42,19 +36,13 @@ class ProductoBusiness{
         return $this->productoData->eliminarProducto($id);
     }
 
-    public function getPaginasProductoCategoria($inicio, $cantidad,$categoriaid){
-        return $this->productoData->getPaginasProductoCategoria($inicio, $cantidad,$categoriaid);
-    }
-
     public function getAllTBProductos(){
         return $this->productoData->getAllTBProductos();
     }
 
-
     public function getUltimoIdInsertado(){
         return $this->productoData->getUltimoIdInsertado();
     }
-
 
 }
 

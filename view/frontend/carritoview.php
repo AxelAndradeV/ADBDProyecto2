@@ -11,8 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrito</title>
-    <link rel="stylesheet" href="../backend/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
-<link rel="stylesheet" href="../backend/plugins/toastr/toastr.min.css">
+    
 </head>
 <body>
     <?php include 'template/header.php' ?>
@@ -25,12 +24,12 @@
         
             
             <?php
-                        // if (isset($_GET['mensaje'])) {
-                        //     echo '<div class="alert alert-success" role="alert">';
-                        //     echo $_GET['mensaje'];
-                        //     echo '</div>';
+                        if (isset($_GET['mensaje'])) {
+                            echo '<div class="alert alert-success" role="alert">';
+                            echo $_GET['mensaje'];
+                            echo '</div>';
                            
-                        // } 
+                        } 
             ?>
            
        
@@ -132,29 +131,7 @@
     <?php include 'template/footer.php' ?>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-<script src="../backend/plugins/sweetalert2/sweetalert2.min.js"></script>
-<script src="../backend/plugins/toastr/toastr.min.js"></script>
 
-<?php 
-          //ALERTAS
-          echo '<script>';
-          echo " var Toast = Swal.mixin({
-               toast: true,
-               position: 'top-right',
-               showConfirmButton: false,
-               timer: 3000,
-               timerProgressBar: true
-             });";
-          if($_GET['mensaje']==1){ //insertar
-            echo "Toast.fire({
-                 icon: 'success',
-
-                title: '<div style=margin-top:0.5rem;>Eliminado con éxito.</div>'
-             });";
-          }
-          echo "</script>";
-
-?>
 
 </body>
 </html>
