@@ -3,9 +3,7 @@
     include '../../business/categoriabusiness.php';
     include '../../business/usuarioBusiness.php';
 
-    // if (is_file("../../business/categoriabusiness.php")){
-    //   include ("../../business/categoriabusiness.php");
-    // }
+   
 
     $categoriaBusiness = new CategoriaBusiness();
     $categorias = $categoriaBusiness->getAllTBCategorias();
@@ -299,7 +297,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
               
               <div class="form-group">
                 <label >Telefono:</label>
-                <input type="number" class="form-control" name="usuariotelefono" id="usuariotelefono" placeholder="Ingrese un telefono">
+                <input type="text" class="form-control" name="usuariotelefono" id="usuariotelefono" placeholder="Ingrese un telefono">
                
               </div>
               <div class="form-group">
@@ -311,12 +309,20 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                 <label >Password:</label>
                 <input type="text" class="form-control" name="usuariopassword" id="usuariopassword" placeholder="Ingrese contraseña">
                
-              </div>
-              <div class="form-group">
-                <label >Tipo:</label>
-                <input type="number" class="form-control" name="usuariotipoid" id="usuariotipoid" placeholder="Ingrese un tipo">
+                <label>Tipo de Usuario: </label>
+              <select class="tipoid" name="tipoid" id="tipoid">
+
+                <option selected>Seleccione el tipo de usuario</option>
+              
+                  <?php foreach($usuarios as $usuario){
+
+                    echo ' <option value="'.$usuario['tipoid'].'" class="badge badge-pill badge-warning" style="font-size: 15px;">'.$usuario['tipodescripcion'].'</option>';
+                  }?>
+
+
+
                
-              </div>
+              </select>
 
 
              
@@ -385,11 +391,18 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
               </div>
               
               
-              <div class="form-group">
-                <label >Tipo de usuario:</label>
-                <input type="text" class="form-control" name="tipoid" id="tipoid"  placeholder="Ingrese el tipo " >
+              <label>Tipo Usuario: </label>
+              <select class="tipoid" name="tipoid" id="tipoid">
+
+                <option selected>Seleccione el tipo de Usuario</option>
+              
+                  <?php foreach($usuarios as $usuario){
+
+                    echo ' <option value="'.$usuario['tipoid'].'" class="badge badge-pill badge-warning" style="font-size: 15px;">'.$usuario['tipodescripcion'].'</option>';
+                  }?>
+
                
-              </div>
+              </select>
               
 
            

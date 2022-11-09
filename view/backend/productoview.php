@@ -330,11 +330,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                
               </select>
 
-              <!-- <div class="form-group">
-                <label >Categoria:</label>
-                <input type="text" class="form-control" name="productocategoriaid" id="productocategoriaid" placeholder="Ingrese categoria">
-               
-              </div>  -->
+            
 
               <div class="form-group">
                 <label>Código: </label>

@@ -5,13 +5,13 @@
 	if(isset($_POST['insertar'])){
 		if(isset($_POST['usuarionombre'])&& isset($_POST['usuariotelefono']) && isset($_POST['usuariocorreo'])
         && isset($_POST['usuariopassword'])
-        && isset($_POST['usuariotipoid'])){
+        && isset($_POST['tipoid'])){
 			$usuarioBusiness = new UsuarioBusiness();
 			$nombre = $_POST['usuarionombre'];
 			$telefono = $_POST['usuariotelefono'];
             $correo = $_POST['usuariocorreo'];
             $password = $_POST['usuariopassword'];
-            $tipoid = $_POST['usuariotipoid'];
+            $tipoid = $_POST['tipoid'];
 			
 
 			
@@ -30,7 +30,22 @@
 	    	}else{
 	    		header("location: ../view/backend/usuarioview.php?mensaje=4" );
 	    	}
-        }
+        }else if(isset($_POST['id'])){
+
+			$categoriaid = $_POST['id'];
+			$categoriaBusiness = new CategoriaBusiness();
+			$resultado = $categoriaBusiness->getAllTBCategorias($categoriaid);
+	
+			$datos = "";
+			foreach ($resultado as $dato) { 
+				
+				$datos .= "<option>".$dato['categoriaid']."</option>";			
+				
+			}
+			echo $datos;
+
+
+		 }
 			 
 		
 	}else if(isset($_POST['actualizar'])){

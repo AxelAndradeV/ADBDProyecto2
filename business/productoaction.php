@@ -80,23 +80,10 @@
 	    	}else{
 	    		header("location: ../view/backend/productoview.php?mensaje=4" );
 	    	}
-			
-		}else if(isset($_POST['id'])){
+			 
+		}
 
-			$categoriaid = $_POST['id'];
-			$categoriaBusiness = new CategoriaBusiness();
-			$resultado = $categoriaBusiness->getAllTBCategorias($categoriaid);
-	
-			$datos = "";
-			foreach ($resultado as $dato) { 
-				
-				$datos .= "<option>".$dato['categoriaid']."</option>";			
-				
-			}
-			echo $datos;
-
-
-		 }
+		
 	}else if(isset($_POST['actualizar'])){
 		if(isset($_POST['productonombre']) && isset($_POST['productoprecio'])
         && isset($_POST['productoestado']) && isset($_POST['productocategoriaid'])

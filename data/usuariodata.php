@@ -1,6 +1,6 @@
 <?php 
 	include_once 'data.php';
-
+ 
 	if (is_file("../domain/usuario.php")){
       	include ("../domain/usuario.php");
     }else{
@@ -69,7 +69,7 @@
             $stm ->bindParam(1,$nombre,PDO::PARAM_STR);
             $stm ->bindParam(2,$telefono,PDO::PARAM_INT);
 			$stm ->bindParam(3,$correo,PDO::PARAM_STR);
-            $stm ->bindParam(4,$password,PDO::PARAM_INT);
+            $stm ->bindParam(4,$password,PDO::PARAM_STR);
             $stm ->bindParam(5,$tipoid,PDO::PARAM_INT);
 			$stm ->bindParam(6,$id,PDO::PARAM_INT);
             $resultado = $stm->execute();
