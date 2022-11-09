@@ -20,17 +20,17 @@ class ProductoBusiness{
     	return $this->productoData->getTotalProductos();
     }
 
-<<<<<<< HEAD
+
     public function insertarProducto($producto){
       
         return $this->productoData->insertarProducto($producto);
     }
 
-=======
+
     public function getTotalProductosCategoria($categoriaid){
         return $this->productoData->getTotalProductosCategoria($categoriaid);
     }
->>>>>>> origin/main
+
     public function getPaginasProducto($inicio, $cantidad){
     	return $this->productoData->getPaginasProducto($inicio, $cantidad);
     }
@@ -50,13 +50,11 @@ class ProductoBusiness{
         return $this->productoData->getAllTBProductos();
     }
 
-<<<<<<< HEAD
+
     public function getUltimoIdInsertado(){
         return $this->productoData->getUltimoIdInsertado();
     }
-=======
-   
->>>>>>> origin/main
+
 
 }
 
