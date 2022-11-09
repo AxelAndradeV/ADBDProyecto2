@@ -65,13 +65,13 @@
 			$correo = $usuario->getCorreo();
             $password = $usuario->getPassword();
 	        $tipoid = $usuario->getTipoid();
-            
-            $stm ->bindParam(1,$nombre,PDO::PARAM_STR);
-            $stm ->bindParam(2,$telefono,PDO::PARAM_INT);
-			$stm ->bindParam(3,$correo,PDO::PARAM_STR);
-            $stm ->bindParam(4,$password,PDO::PARAM_STR);
-            $stm ->bindParam(5,$tipoid,PDO::PARAM_INT);
-			$stm ->bindParam(6,$id,PDO::PARAM_INT);
+            $stm ->bindParam(1,$id,PDO::PARAM_INT);
+            $stm ->bindParam(2,$nombre,PDO::PARAM_STR);
+            $stm ->bindParam(3,$telefono,PDO::PARAM_INT);
+			$stm ->bindParam(4,$correo,PDO::PARAM_STR);
+            $stm ->bindParam(5,$password,PDO::PARAM_STR);
+            $stm ->bindParam(6,$tipoid,PDO::PARAM_INT);
+			
             $resultado = $stm->execute();
             Database::desconectar();
 	           

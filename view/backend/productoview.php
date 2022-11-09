@@ -588,47 +588,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 
     });
 
-    // $("#btnAgregar").on("click", function($id){
-
-    // var productocategoriaid = $(this).attr("productocategoriaid");
-
-    // $("#modalAgregarProducto #productocategoriaid").val(productocategoriaid);
-    // if(productocategoriaid == 1){
-    //   $("#modalAgregarProducto #productocategoriaid").val('1');
-    // }else if(productocategoriaid == 2){
-    //   $("#modalAgregarProducto #productocategoriaid").val('2'); 
-    // }
-
-
-
-
-    // });
-
-    // $(".tabla-productos tbody").on("click", "button.btnEditarProducto", function(){
-    //     $("#categorias").empty();
-    //     var categoriaid = $(this).attr("categoriaid");
-    //     $("#modalAgregarProducto #categoriaid").val(categoriaid);
-    //     var datos = {categoriaid: "obtenerCategorias=true"};
-    //     console.log(datos);
-
-    //     $.ajax({
-
-    //               url:"../../business/productoaction.php",
-    //               method: "POST",
-    //               data: datos,
-
-    //               success:function(respuesta){
-
-    //                   console.log(respuesta);
-    //                   $("#categorias").append(respuesta);
-
-    //               }
-
-    //     });
-
-
-
-    //});
+   
 
     $(".tabla-productos tbody").on("click", "button.btnEliminarProducto", function() {
 

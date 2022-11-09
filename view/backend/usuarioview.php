@@ -1,14 +1,14 @@
 <?php  
 
-    include '../../business/categoriabusiness.php';
-    include '../../business/usuarioBusiness.php';
+    include '../../business/usuariobusiness.php';
+    include '../../business/tipousuariobusiness.php';
 
    
 
-    $categoriaBusiness = new CategoriaBusiness();
-    $categorias = $categoriaBusiness->getAllTBCategorias();
     $usuarioBusiness = new UsuarioBusiness();
     $usuarios = $usuarioBusiness->getAllTBusuarios();
+    $tipousuarioBusiness = new TipoUsuarioBusiness();
+    $tipousuarios = $tipousuarioBusiness->getAllTBTipoUsuarios();
    // echo __DIR__;
    // var_dump($categorias);
 
@@ -132,7 +132,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
           </li>
          
           <li class="nav-item">
-            <a href=".usuarioview.php" class="nav-link">
+            <a href="usuarioview.php" class="nav-link">
                <i class="nav-icon fas fa-users"></i>
               <p>
                 Usuarios
@@ -308,21 +308,19 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
               <div class="form-group">
                 <label >Password:</label>
                 <input type="text" class="form-control" name="usuariopassword" id="usuariopassword" placeholder="Ingrese contraseña">
-               
+                      </div>
+
                 <label>Tipo de Usuario: </label>
               <select class="tipoid" name="tipoid" id="tipoid">
 
                 <option selected>Seleccione el tipo de usuario</option>
               
-                  <?php foreach($usuarios as $usuario){
+                  <?php foreach($tipousuarios as $tipousuario){
 
-                    echo ' <option value="'.$usuario['tipoid'].'" class="badge badge-pill badge-warning" style="font-size: 15px;">'.$usuario['tipodescripcion'].'</option>';
+                    echo ' <option value="'.$tipousuario['tipoid'].'" class="badge badge-pill badge-warning" style="font-size: 15px;">'.$tipousuario['tipodescripcion'].'</option>';
                   }?>
 
-
-
-               
-              </select>
+            </select>
 
 
              
@@ -330,23 +328,23 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
              <center><button type="submit" name="insertar" class="btn btn-primary">Insertar</button></center> 
             </form>
 
+        </div>
+
+      </div>
+
     </div>
-
-  </div>
-
-</div>
   </div>
 
 </div>
 
 <div id="modalEditarUsuario" class="modal fade" role="dialog">
-  
-  <div class="modal-dialog">
 
-    <div class="modal-content">
+    <div class="modal-dialog">
+
+      <div class="modal-content">
 
         <div class="modal-header">
-          <h4 class="modal-title">Editar Usuario</h4>
+          <h4 class="modal-title">Editar usuario</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -356,68 +354,59 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 
           <div class="box-body">
 
-            <form method="POST" action="../../business/usuarioaction.php"  enctype="multipart/form-data">
-              
+            <form method="POST" action="../../business/usuarioaction.php" enctype="multipart/form-data">
+
               <div class="form-group">
                 <input type="hidden" name="usuarioid" id="usuarioid">
-                
+
               </div>
 
               <div class="form-group">
                 <label >Nombre:</label>
-                <input type="text" class="form-control" name="usuarionombre" id="usuarionombre" placeholder="Ingrese el nombre">
+                <input type="text" class="form-control" name="usuarionombre" id="usuarionombre" placeholder="Ingrese un nombre">
                
               </div>
               
-                      
               <div class="form-group">
                 <label >Telefono:</label>
-                <input type="text" class="form-control" name="usuariotelefono" id="usuariotelefono" placeholder="Ingrese el telefono">
+                <input type="text" class="form-control" name="usuariotelefono" id="usuariotelefono" placeholder="Ingrese un telefono">
                
               </div>
-              
-              
               <div class="form-group">
                 <label >Correo:</label>
-                <input type="text" class="form-control" name="usuariocorreo" id="usuariocorreo" placeholder="Ingrese el correo">
+                <input type="text" class="form-control" name="usuariocorreo" id="usuariocorreo" placeholder="Ingrese un correo">
                
               </div>
-              
-              
               <div class="form-group">
                 <label >Password:</label>
-                <input type="text" class="form-control" name="usuariopassword" id="usuariopassword" placeholder="Ingrese una contraseña">
-               
-              </div>
-              
-              
-              <label>Tipo Usuario: </label>
+                <input type="text" class="form-control" name="usuariopassword" id="usuariopassword" placeholder="Ingrese contraseña">
+                      </div>
+
+              <label>Tipo de Usuario: </label>
               <select class="tipoid" name="tipoid" id="tipoid">
 
-                <option selected>Seleccione el tipo de Usuario</option>
+                <option selected>Seleccione el tipo de usuario</option>
               
-                  <?php foreach($usuarios as $usuario){
+                  <?php foreach($tipousuarios as $tipousuario){
 
-                    echo ' <option value="'.$usuario['tipoid'].'" class="badge badge-pill badge-warning" style="font-size: 15px;">'.$usuario['tipodescripcion'].'</option>';
+                    echo ' <option value="'.$tipousuario['tipoid'].'" class="badge badge-pill badge-warning" style="font-size: 15px;">'.$tipousuario['tipodescripcion'].'</option>';
                   }?>
 
-               
-              </select>
-              
+            </select>
 
-           
-              
-             <center><button type="submit" name="actualizar" class="btn btn-primary">Actualizar</button></center> 
+              <center><button type="submit" name="actualizar" class="btn btn-primary">Actualizar</button></center>
             </form>
 
+          </div>
+
+        </div>
+
+      </div>
     </div>
 
   </div>
 
-</div>
-  </div>
 
-</div>
 
 
 
