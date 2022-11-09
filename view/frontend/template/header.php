@@ -6,11 +6,13 @@
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Francois+One&family=Lato:wght@300;700&family=Titan+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../backend/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="css/main.css">
     <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
   />
+  
 </head>
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top " style=" background-color: #b91e1e;">
         <a class="navbar-brand" href="#"></a>
@@ -28,7 +30,7 @@
                 </li> -->
                 <li class="nav-item">
                     <span style="color: yellow;"></span>
-                    <a class="nav-link text-white nav-item-text" href="carritoview.php">Carrito
+                    <a class="nav-link text-white nav-item-text" href="carritoview.php">Carrito <i class="fas fa-shopping-cart"></i>
                         (<?php
                             if(empty($_SESSION['carrito'])){
                                 echo '<span style="color: yellow;">0</span>';
@@ -51,5 +53,5 @@
            
         </div>
     </nav>
-    <br><br><br><br><br>
+    <br><br><br>
 </html>
