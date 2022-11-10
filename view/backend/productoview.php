@@ -50,6 +50,10 @@
   <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <link rel="stylesheet" href="plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -505,7 +509,9 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
  <script src="plugins/sweetalert2/sweetalert2.min.js"></script>
-  <script src="plugins/toastr/toastr.min.js"></script>
+<script src="plugins/toastr/toastr.min.js"></script>
+<script src="https://unpkg.com/web-audio-daw"></script>
+<script src="dist/js/notificacion.js"></script>
 
 
 <?php

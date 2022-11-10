@@ -25,7 +25,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Categorías | Dashboard</title>
+  <title>Usuario | Dashboard</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -59,6 +59,10 @@
   <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <link rel="stylesheet" href="plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
   <style>
     .hidetext { -webkit-text-security: disc; /* Default */ }
   </style>
@@ -478,6 +482,8 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <script src="plugins/sweetalert2/sweetalert2.min.js"></script>
 <script src="plugins/toastr/toastr.min.js"></script>
+<script src="https://unpkg.com/web-audio-daw"></script>
+<script src="dist/js/notificacion.js"></script>
 
 <?php 
   //ALERTAS

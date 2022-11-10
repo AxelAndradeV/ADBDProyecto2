@@ -91,6 +91,33 @@
 		}else{
 			header("location: ../view/backend/ordenview.php?mensaje=4" );
 		}
+	}else if(isset($_POST['vista'])){
+		$ordenBusiness = new OrdenBusiness();
+		$notificaciones = "";
+		if($_POST["vista"] != ''){
+			$ordenBusiness->modificarNotificacion();
+		}else{
+			$totalOrdenesNuevas = $ordenBusiness->obtenerNotificaciones();
+			if($totalOrdenesNuevas >=1){
+				$notificaciones.= '<div class="dropdown-divider"></div>
+				<span  class="dropdown-item">
+				<i class="fas fa-file mr-2 "></i> '.$totalOrdenesNuevas.' órdenes nuevas
+
+				</span>';
+			}else{
+				$notificaciones.= '<div class="dropdown-divider"></div>
+				<span  class="dropdown-item">
+				<i class="fas fa-file mr-2 "></i> Sin notificaciones nuevas
+
+				</span>';
+			}
+
+			$data = array(
+				'notification'   => $notificaciones,
+				'unseen_notification' => $totalOrdenesNuevas
+			);
+			echo json_encode($data);
+		}
 	}
 
 

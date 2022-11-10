@@ -75,10 +75,11 @@
     	public function insertarNotificacion($ordenid){
     		$pdo = Database::conectar();
 	        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	        $insertar = "CALL insertarNotificacion(?,?)";
+	        $insertar = "CALL insertarNotificacion(?)";
+	       
 	        $q = $pdo->prepare($insertar);
 	        $q ->bindParam(1,$ordenid,PDO::PARAM_INT);
-	        $q ->bindParam(2,0,PDO::PARAM_INT);
+	       
 	        $resultado = $q->execute();
             Database::desconectar();
 
@@ -95,6 +96,16 @@
 
 	        return $resultado;
 
+    	}
+
+    	public function obtenerNotificaciones(){
+    		
+    		$pdo = Database::conectar();
+            $stm = $pdo->prepare("CALL obtenerNotificaciones()");
+            $stm->execute();
+            $count = $stm->rowCount();
+            Database::desconectar();
+            return $count;
     	}
 
     	public function modificarOrden($ordenid,$ordenestado,$usuarioid ){

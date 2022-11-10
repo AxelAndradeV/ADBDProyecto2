@@ -30,6 +30,10 @@
         public function getAllTBUsuarios(){
              return $this->usuarioData->getAllTBUsuarios();
         }
+
+        public function obtenerUsuarioLogin($correo, $password){
+            return $this->usuarioData->obtenerUsuarioLogin($correo, $password);
+        }
     }
 
 

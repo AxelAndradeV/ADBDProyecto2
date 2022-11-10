@@ -33,6 +33,10 @@ class OrdenBusiness{
 		return $this->ordenData->modificarNotificacion();
 	}
 
+	public function obtenerNotificaciones(){
+		return $this->ordenData->obtenerNotificaciones();	
+	}
+
 	public function eliminarOrden($id){
 		return $this->ordenData->eliminarOrden($id);	
 	}
