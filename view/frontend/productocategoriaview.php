@@ -19,11 +19,6 @@ $productos = $productoBusiness->getPaginasProductoCategoria($inicio, $cantidadPo
 
 
 
-// border-radius: 50%;  background: #ffffff;
-// box-shadow: inset -6px -6px 30px #c7c7c7,
-//             inset 6px 6px 30px #ffffff;
-
-
 
 ?>
 
@@ -69,7 +64,7 @@ $productos = $productoBusiness->getPaginasProductoCategoria($inicio, $cantidadPo
 
     
     <div class="container">
-      <!--  <h1 class="text-center animate__animated animate__bounce" style="font-family:Amatic SC, sans-serif;font-weight: 600;">Categorías</h1> -->
+      
        <hr class="mt-3 mb-3 bg-faded"/>
         <div class="row">
             <div class="col swiper animate__animated animate__flipInX animate__delay-1s">
@@ -96,25 +91,7 @@ $productos = $productoBusiness->getPaginasProductoCategoria($inicio, $cantidadPo
         </div>
          <hr class="mt-3 mb-3 bg-faded"/>
         
-      		<!-- <div>
-      			<h1 id="not-available" class="text-center" style="font-family:Amatic SC, sans-serif;font-weight: 600;"></h1>
-      		</div> -->
-            
-        <?php
-                    if (isset($_GET['mensaje'])) {
-                        if($_GET['mensaje']=="exito"){
-                            echo '<div class="alert alert-success" role="alert">';
-                            echo '<a href="carritoview.php" class="badge badge-success">Ver carrito</a>';
-                            echo '</div>';
-                        }else if($_GET['mensaje']=="repetido"){
-                            echo '<div class="alert alert-success" role="alert">';
-                            echo 'Ya ha sido agregado :c';
-                            echo '</div>';
-                        }
-                        
-                        
-                    } 
-        ?>
+      
             
         
   <br><br><br>
@@ -144,7 +121,7 @@ $productos = $productoBusiness->getPaginasProductoCategoria($inicio, $cantidadPo
               
                     echo '<div class="col3 mx-3 mt-3">
                     <div class="card animate__animated animate__fadeInDown animate__delay-1s">
-                        <img class="card-img-top d-block mx-auto producto-item-img" src="'.$producto['productoimg'].'" alt="" >
+                        <img class="card-img-top d-block mx-auto mt-2 producto-item-img" src="../backend/'.$producto['productoimg'].'" alt="" style="border-radius: 50%;" >
                         <div class="card-body">
                             <h5 class="card-title text-center producto-item ">'.$producto['productonombre'].'</h5>
                             <p class="card-text text-center producto-item-precio">₡'.$producto['productoprecio'].'</p>
@@ -248,7 +225,7 @@ $(document).ready(function(){
         value = isNaN(value)? 0 : value;
         value ++;
         input.value = value;
-        //animateCSS('.productocantidad','rubberBand');
+ 
       }
       function decreaseCount(a, b) {
         var input = b.nextElementSibling;
@@ -257,7 +234,7 @@ $(document).ready(function(){
           value = isNaN(value)? 0 : value;
           value --;
           input.value = value;
-         // animateCSS('.productocantidad','rubberBand');
+         
         }
       }
     </script>
@@ -268,7 +245,7 @@ $(document).ready(function(){
     	var app = document.getElementById('not-available');
     	var typewriter = new Typewriter(app, {
     		loop: true,
-    		delay: 80
+    		delay: 60
     		
     	});
 

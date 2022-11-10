@@ -2,17 +2,16 @@
  
     include '../../business/categoriabusiness.php';
 
-    // if (is_file("../../business/categoriabusiness.php")){
-    //   include ("../../business/categoriabusiness.php");
-    // }
-
     $categoriaBusiness = new CategoriaBusiness();
     $categorias = $categoriaBusiness->getAllTBCategorias();
-   // echo __DIR__;
-   // var_dump($categorias);
+
 
 
 ?>
+
+<?php 
+   include 'template/sesion.php';
+  ?>
 
 
 <!DOCTYPE html>
@@ -58,12 +57,8 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
-  <!-- Preloader -->
- <!--  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-  </div> -->
 
-  <!-- Navbar --> 
+  <!-- Navbar -->
   <?php include 'template/header.php' ?>
   <!-- /.navbar -->
 
@@ -71,7 +66,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index.html" class="brand-link d-flex justify-content-center ">
-     <!--  <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
+
       <span class="brand-text font-weight-light">Panel de administración SO</span>
     </a>
 
@@ -85,7 +80,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
       
         <div class="info d-flex justify-content-between">
           <i class="fas fa-user text-light mr-3" style="font-size: 23px;"></i>
-          <a href="#" class="d-block">Usuario</a>
+          <a href="#" class="d-block"><?php echo $usuario ?></a>
         </div>
       </div>
 
@@ -131,7 +126,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
           </li>
          
           <li class="nav-item">
-            <a href="usuarioview.php" class="nav-link">
+            <a href=".usuarioview.php" class="nav-link">
                <i class="nav-icon fas fa-users"></i>
               <p>
                 Usuarios
@@ -143,14 +138,14 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                 <a href="usuarioview.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <i class="fas fa-users-cog nav-icon"></i>
-                  <p>Agregar usuario</p>
+                  <p>Gestionar</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="usuarioview.php" class="nav-link">
+                <a href="tipousuarioview.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <i class="fas fa-users-cog nav-icon"></i>
-                  <p>Ver Tipos</p>
+                  <p>Tipos</p>
                 </a>
               </li>
             </ul>
@@ -168,7 +163,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
           
 
          <li class="nav-item ">
-            <a href="./index.html" class="nav-link">
+            <a href="../../business/usuarioaction.php?cerrarSesion=true" class="nav-link">
                <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                 Cerrar sesión
@@ -451,15 +446,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 
 ?>
 
-<script>
-     // var Toast = Swal.mixin({
-     //   toast: true,
-     //   position: 'top-end',
-     //   showConfirmButton: false,
-     //   timer: 3000
-     // });
- 
-</script>
+
 
 <script>
   $(function () {
@@ -486,7 +473,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
     var descripcion = $(this).attr("descripcion");
     var img = $(this).attr("imagen");
     var codigo =  $(this).attr("codigo");
-    alert(img);
+  
     $("#modalEditarCategoria #categoriaid").val(idcategoria);
     $("#modalEditarCategoria #categoriadescripcion").val(descripcion);
     $("#modalEditarCategoria #categoriacodigo").val(codigo);
@@ -502,16 +489,7 @@ $(".tabla-categorias tbody").on("click", "button.btnEliminarCategoria", function
   var categoriaid = $(this).attr("categoriaid");
   var imagen = $(this).attr("imagen");
   var codigo = $(this).attr("codigo");
-//   var Toast = Swal.mixin({
-//       toast: true,
-//       position: 'top-end',
-//       showConfirmButton: false,
-//       timer: 3000
-//     });
-// Toast.fire({
-//         icon: 'success',
-//         title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-//       });
+
       Swal.fire({
         title: '¿Desea eliminar la categoría?',
         text: "No se podrá revertir el cambio",
@@ -524,10 +502,10 @@ $(".tabla-categorias tbody").on("click", "button.btnEliminarCategoria", function
         }).then((result) => {
           if (result.isConfirmed) {
             window.location = "../../business/categoriaaction.php?eliminar=true&id="+categoriaid+"&imagen="+imagen+"&codigo="+codigo;
-          
+      
           }
     })
-
+ 
 
 });
 
@@ -544,7 +522,7 @@ $(".nuevaImagen").change(function(){
 
       $(".nuevaImagen").val("");
 
-       swal({
+       Toast.fire({
           title: "Error al subir la imagen",
           text: "¡La imagen debe estar en formato JPG o PNG!",
           type: "error",
@@ -555,7 +533,7 @@ $(".nuevaImagen").change(function(){
 
       $(".nuevaImagen").val("");
 
-       swal({
+       Toast.fire({
           title: "Error al subir la imagen",
           text: "¡La imagen no debe pesar más de 2MB!",
           type: "error",

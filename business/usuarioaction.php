@@ -1,6 +1,7 @@
-<?php 	 
-	
+<?php 
+	session_start();
 	include 'usuariobusiness.php';
+
 
 	if(isset($_POST['insertar'])){
 		if(isset($_POST['usuarionombre'])&& isset($_POST['usuariotelefono']) && isset($_POST['usuariocorreo'])
@@ -93,10 +94,39 @@
 
 
 	}
+	else if(isset($_POST['iniciarSesion']) ){
+		if(isset($_POST['usuariocorreo'] ) && isset($_POST['usuariopassword']) ){
+
+			$correo = $_POST['usuariocorreo'];
+			$password = $_POST['usuariopassword'];
+
+			$usuarioBusiness = new UsuarioBusiness();
+			$datosUsuario = $usuarioBusiness->obtenerUsuarioLogin(
+				$correo, $password);
+
+			if(count($datosUsuario)>=1){
+				if($datosUsuario[0]['usuariocorreo'] == $correo &&  $datosUsuario[0]['usuariopassword'] == $password){
+
+					$_SESSION["id"] = $datosUsuario[0]['usuarioid'];
+					$_SESSION["usuario"] = $datosUsuario[0]['usuarionombre'];
+
+					header("location: ../view/backend/index.php" );
+				}else{
+					header("location: ../view/backend/loginview.php?mensaje=4" );
+				}
+			}else{
+				header("location: ../view/backend/loginview.php?mensaje=3" );
+			}
+
+		}else{
+			header("location: ../view/backend/loginview.php?mensaje=2" );
+		}
+		
+	}else if(isset($_GET['cerrarSesion'])){
+		session_destroy();
+		header("location: ../view/backend/loginview.php");
+	}
 
 
 
-
-
-
-?>
+ ?>

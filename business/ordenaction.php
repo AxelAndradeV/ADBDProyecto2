@@ -70,8 +70,9 @@
 	}else if(isset($_POST['actualizar'])){
 		$ordenid = $_POST['ordenid'];
 		$ordenestado = $_POST['ordenestado'];
+		$usuarioid = $_SESSION['id'];
 		$ordenBusiness = new OrdenBusiness();
-		$resultado = $ordenBusiness->modificarOrden($ordenid,$ordenestado);
+		$resultado = $ordenBusiness->modificarOrden($ordenid,$ordenestado,$usuarioid );
 
 
 		if($resultado == 1){

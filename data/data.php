@@ -1,7 +1,5 @@
 <?php 
 
-define("key","ordenes");
-define("codigo","AES-128-ECB");
 
 class Database{
 

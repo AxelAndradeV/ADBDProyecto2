@@ -1,4 +1,6 @@
 <?php 
+
+ 
   include '../../business/ordenbusiness.php';
   include '../../business/productobusiness.php';
 
@@ -13,6 +15,10 @@
 
 
  ?>
+
+ <?php 
+   include 'template/sesion.php';
+  ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -50,11 +56,6 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
-  <!-- Preloader -->
- <!--  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-  </div> -->
-
   <!-- Navbar -->
   <?php include 'template/header.php' ?>
   <!-- /.navbar -->
@@ -62,7 +63,7 @@
   <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index.html" class="brand-link d-flex justify-content-center ">
+    <a href="index.php" class="brand-link d-flex justify-content-center ">
      <!--  <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
       <span class="brand-text font-weight-light">Panel de administración SO</span>
     </a>
@@ -77,7 +78,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
       
         <div class="info d-flex justify-content-between">
           <i class="fas fa-user text-light mr-3" style="font-size: 23px;"></i>
-          <a href="#" class="d-block">Usuario</a>
+          <a href="#" class="d-block"><?php echo $usuario ?></a>
         </div>
       </div>
 
@@ -135,14 +136,14 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                 <a href="usuarioview.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <i class="fas fa-users-cog nav-icon"></i>
-                  <p>Agregar Usuario Nuevo</p>
+                  <p>Gestionar</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="usuarioview.php" class="nav-link">
+                <a href="tipousuarioview.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <i class="fas fa-users-cog nav-icon"></i>
-                  <p>Ver Tipos</p>
+                  <p>Tipos</p>
                 </a>
               </li>
             </ul>
@@ -160,7 +161,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
           
 
          <li class="nav-item ">
-            <a href="./index.html" class="nav-link">
+            <a href="../../business/usuarioaction.php?cerrarSesion=true" class="nav-link">
                <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                 Cerrar sesión
@@ -207,7 +208,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
               <div class="icon">
                 <i class="fas fa-file-invoice"></i>
               </div>
-              <a href="#" class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
+              <a href="ordenview.php" class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <div class="col-lg-3 col-6">
@@ -221,7 +222,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
               <div class="icon">
                 <i class="fas fa-hamburger"></i>
               </div>
-              <a href="#" class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
+              <a href="productoview.php" class="small-box-footer">Más información<i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -229,7 +230,17 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3><?php echo "₡".$totalGanancias[0]['totalganancias'] ?></h3>
+                <h3><?php 
+                if($totalGanancias[0]['totalganancias'] >=1 ){
+                  echo "₡".$totalGanancias[0]['totalganancias'] ;
+                }else{
+                  echo "₡0";
+                }
+                
+
+                ?>
+                  
+                </h3>
 
                 <p>Total ganancias</p>
               </div>
@@ -245,7 +256,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
          
          
         </div>
-        <!-- /.row -->
+       
         <!-- Main row -->
        
         <!-- /.row (main row) -->
@@ -306,26 +317,6 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 <script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
 
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-       "language": {
-            "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
-        },
-      "paging": true,
-      "lengthChange": false,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
-</script>
 </body>
 </html>

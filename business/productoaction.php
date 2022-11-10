@@ -5,7 +5,7 @@
 	if(isset($_POST['insertar'])){
 		if(isset($_POST['productonombre'])
 		&&isset($_POST['productoprecio']) && isset($_POST['productoestado'])
-		&&isset($_POST['productocategoriaid']) &&isset($_POST['productocodigo'])
+		&&isset($_POST['productocategoriaid']) 
 		){
 			$productoBusiness = new ProductoBusiness();		
 			$nombre = $_POST['productonombre'];	
@@ -13,7 +13,7 @@
 			$precio = $_POST['productoprecio'];
 			$estado = $_POST['productoestado'];
 			$categoria = $_POST['productocategoriaid'];
-			$codigo = $_POST['productocodigo'];
+			$codigo = $productoBusiness->getUltimoIdInsertado()+11;
 			
 			
 
@@ -52,6 +52,8 @@
 				     $origen = imagecreatefrompng($_FILES["nuevaImagen"]["tmp_name"]);      
 
 				     $destino = imagecreatetruecolor(160, 160);
+				     imagealphablending($destino, false);
+				     imagesavealpha($destino, true);
 
 				     imagecopyresized($destino, $origen, 0, 0, 0, 0,160, 160, $ancho, $alto);
 
@@ -63,13 +65,7 @@
 			}
 
 		
-	    	$producto = new Producto();				 
-			$producto->setNombre($nombre);	
-			$producto->setImagenProducto($rutaAux);		   		    	
-	    	$producto->setPrecioProducto($precio);
-			$producto->setEstadoProducto($estado);
-			$producto->setCategoriaProducto($categoria);
-			$producto->setProductocodigo($codigo);
+	    	$producto = new Producto(0,$nombre,$rutaAux,$precio,$estado,$categoria,$codigo);				 
 			
 			
 	    	$resultado = $productoBusiness->insertarProducto($producto);
@@ -149,14 +145,8 @@
 				}
 
 				$productoBusiness = new ProductoBusiness();
-				$producto = new Producto();
-				$producto->setIdProducto($productoid);
-				$producto->setNombre($productonombre);				
-                $producto->setPrecioProducto($productoprecio);
-                $producto->setEstadoProducto($productoestado);
-                $producto->setCategoriaProducto($productocategoriaid);  
-				$producto->setProductocodigo($productocodigo);          
-				$producto->setImagenProducto($rutaAux);
+				$producto = new Producto($productoid, $productonombre, $rutaAux,$productoprecio,$productoestado,$productocategoriaid,$productocodigo);
+				
 
 	    		$resultado = $productoBusiness->modificarProducto($producto);
 

@@ -7,7 +7,9 @@
 
 
  ?>
-
+<?php 
+   include 'template/sesion.php';
+  ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -74,7 +76,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
       
         <div class="info d-flex justify-content-between">
           <i class="fas fa-user text-light mr-3" style="font-size: 23px;"></i>
-          <a href="#" class="d-block">Usuario</a>
+          <a href="#" class="d-block"><?php echo $usuario ?></a>
         </div>
       </div>
 
@@ -157,7 +159,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
           
 
          <li class="nav-item ">
-            <a href="./index.html" class="nav-link">
+            <a href="../../business/usuarioaction.php?cerrarSesion=true" class="nav-link">
                <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                 Cerrar sesión

@@ -19,7 +19,7 @@
 }
 .producto-item-img{
 	width: 10rem;
-    min-height: 200px;
+    min-height: 10rem;
     max-height: auto;
 }
 

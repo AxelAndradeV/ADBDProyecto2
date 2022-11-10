@@ -113,6 +113,7 @@ $categorias = $categoriaBusiness->getAllTBCategorias();
         <br><br><br>
         <h1 class="text-center animate__animated animate__bounce" style="font-family:Amatic SC, sans-serif;font-weight: 600;">Productos</h1>
        
+
         <div class="row d-flex justify-content-center">
 
             <?php 
@@ -127,7 +128,7 @@ $categorias = $categoriaBusiness->getAllTBCategorias();
               
                     echo '<div class="col3 mx-3 mt-3">
                     <div class="card animate__animated animate__fadeInDown animate__delay-1s">
-                        <img class="card-img-top d-block mx-auto producto-item-img" src="'.$producto['productoimg'].'" alt="" >
+                        <img class="card-img-top d-block mx-auto mt-2 producto-item-img" src="../backend/'.$producto['productoimg'].'" alt="" style="border-radius: 50%;">
                         <div class="card-body">
                             <h5 class="card-title text-center producto-item ">'.$producto['productonombre'].'</h5>
                             <p class="card-text text-center producto-item-precio">₡'.$producto['productoprecio'].'</p>

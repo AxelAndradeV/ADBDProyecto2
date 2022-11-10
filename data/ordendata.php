@@ -62,17 +62,49 @@
 	        $q ->bindParam(8,$estado,PDO::PARAM_INT);
 			
 			$resultado = $q->execute();
+
             Database::desconectar();
+
+            $ordenData = new OrdenData();
+			$ordenData->insertarNotificacion($nextId);
 	           
 	        return $resultado;
     	}
 
-    	public function modificarOrden($ordenid,$ordenestado){
+
+    	public function insertarNotificacion($ordenid){
+    		$pdo = Database::conectar();
+	        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	        $insertar = "CALL insertarNotificacion(?,?)";
+	        $q = $pdo->prepare($insertar);
+	        $q ->bindParam(1,$ordenid,PDO::PARAM_INT);
+	        $q ->bindParam(2,0,PDO::PARAM_INT);
+	        $resultado = $q->execute();
+            Database::desconectar();
+
+    	}
+
+    	public function modificarNotificacion(){
+    		$pdo = Database::conectar();
+	        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	        $modificar = "CALL modificarNotificacion()";
+	        $q = $pdo->prepare($modificar);
+	        $resultado = $q->execute();
+
+	        Database::desconectar();
+
+	        return $resultado;
+
+    	}
+
+    	public function modificarOrden($ordenid,$ordenestado,$usuarioid ){
 			$pdo = Database::conectar();
-            $stm = $pdo->prepare("CALL actualizarEstadoOrden(?,?)");
+            $stm = $pdo->prepare("CALL actualizarEstadoOrden(?,?,?)");
            
             $stm ->bindParam(1,$ordenid,PDO::PARAM_INT);          
             $stm ->bindParam(2,$ordenestado,PDO::PARAM_INT); 
+            $stm ->bindParam(3,$usuarioid,PDO::PARAM_INT); 
+
             $resultado = $stm->execute();
             Database::desconectar();
 	           

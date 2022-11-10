@@ -30,6 +30,10 @@
 		public function getAllTBCategorias(){
 			 return $this->categoriaData->getAllTBCategorias();
 		}
+
+        public function getDescripcionCategoria($id){
+            return $this->categoriaData->getDescripcionCategoria($id);
+        }
 	}
 
 

@@ -70,7 +70,6 @@
 			
 
 
-			
 		}
 	}else if(isset($_POST['actualizar'])){
 		if(isset($_POST['categoriadescripcion']) && isset($_POST['categoriaid'])){
@@ -104,6 +103,8 @@
 						$origen = imagecreatefromjpeg($_FILES["editarImagen"]["tmp_name"]);						
 
 						$destino = imagecreatetruecolor(160, 160);
+						 imagealphablending($destino, false);
+				     	imagesavealpha($destino, true);
 
 						imagecopyresized($destino, $origen, 0, 0, 0, 0, 160, 160, $ancho, $alto);
 
@@ -117,12 +118,14 @@
 
 						$aleatorio = mt_rand(100,999);
 
-						$ruta = $directorio."/".$aleatorio.".jpg";
+						$ruta = $directorio."/".$aleatorio.".png";
 				     	$rutaAux = "img/categorias/".$_POST["categoriacodigo"]."/".$aleatorio.".png";
 
 						$origen = imagecreatefrompng($_FILES["editarImagen"]["tmp_name"]);						
 
 						$destino = imagecreatetruecolor(160, 160);
+						 imagealphablending($destino, false);
+				     imagesavealpha($destino, true);
 
 						imagecopyresized($destino, $origen, 0, 0, 0, 0, 160, 160, $ancho, $alto);
 
@@ -170,11 +173,37 @@
 		}
 
 
+	}else if(isset($_GET['obtenerCategorias'])){
+
+		$categoriaBusiness = new CategoriaBusiness();
+		$categorias = $categoriaBusiness ->getAllTBCategorias();
+		$opciones = "";
+
+		if(isset($_GET['categoriaid'])){
+			$id = $_GET['categoriaid'];
+
+			foreach ($categorias as $categoria) {
+				if($categoria['categoriaid'] == $id){
+					$opciones .= '<option selected value="'.$categoria['categoriaid'].'">'.$categoria['categoriadescripcion'].'</option>';
+				}else{
+					$opciones .= '<option value="'.$categoria['categoriaid'].'">'.$categoria['categoriadescripcion'].'</option>';
+				}
+				
+			}
+
+
+		}else{
+			foreach ($categorias as $categoria) {
+				$opciones .= '<option value="'.$categoria['categoriaid'].'">'.$categoria['categoriadescripcion'].'</option>';
+			}
+		}
+		
+
+		
+
+		
+		echo $opciones;
 	}
-
-
-
-
 
 
 ?>

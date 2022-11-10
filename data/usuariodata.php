@@ -1,18 +1,17 @@
-<?php 
+<?php 	 
+	
 	include_once 'data.php';
- 
-	if (is_file("../domain/usuario.php")){
-      	include ("../domain/usuario.php");
+    if (is_file("../domain/usuario.php")){
+        include ("../domain/usuario.php");
     }else{
-    	include ("../../domain/usuario.php");
+        include ("../../domain/usuario.php");
     }
+	
+class UsuarioData extends Database{
 
-//	include '../domain/usuario.php';
-	class UsuarioData extends Database {
-		public function __construct(){}
+	public function __construct(){}
 
-
-		public function getUltimoIdInsertado(){
+	public function getUltimoIdInsertado(){
         	$pdo = Database::conectar();
 	        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	        $stmt = $pdo ->prepare("SELECT MAX(usuarioid) AS usuarioid  FROM tbusuario");
@@ -65,13 +64,13 @@
 			$correo = $usuario->getCorreo();
             $password = $usuario->getPassword();
 	        $tipoid = $usuario->getTipoid();
-            
-            $stm ->bindParam(1,$nombre,PDO::PARAM_STR);
-            $stm ->bindParam(2,$telefono,PDO::PARAM_INT);
-			$stm ->bindParam(3,$correo,PDO::PARAM_STR);
-            $stm ->bindParam(4,$password,PDO::PARAM_STR);
-            $stm ->bindParam(5,$tipoid,PDO::PARAM_INT);
-			$stm ->bindParam(6,$id,PDO::PARAM_INT);
+            $stm ->bindParam(1,$id,PDO::PARAM_INT);
+            $stm ->bindParam(2,$nombre,PDO::PARAM_STR);
+            $stm ->bindParam(3,$telefono,PDO::PARAM_INT);
+			$stm ->bindParam(4,$correo,PDO::PARAM_STR);
+            $stm ->bindParam(5,$password,PDO::PARAM_STR);
+            $stm ->bindParam(6,$tipoid,PDO::PARAM_INT);
+			
             $resultado = $stm->execute();
             Database::desconectar();
 	           
@@ -96,20 +95,26 @@
             Database::desconectar();
             return $stm->fetchAll(PDO::FETCH_ASSOC);
         }
+	
+		//insertar
+		//actualizar
+		//eliminar
+		//obtener
+
+		//iniciar sesión
+	public function obtenerUsuarioLogin($correo, $password){
+		$pdo = Database::conectar();
+		$stm = $pdo->prepare("CALL obtenerDatosUsuario(?,?)");
+		$stm->bindParam(1,$correo, PDO::PARAM_STR);
+		$stm->bindParam(2,$password, PDO::PARAM_STR);
+		$stm->execute();
+		Database::desconectar();
+		return $stm->fetchAll(PDO::FETCH_ASSOC);
+		
 	}
-
-//      $data = new UsuarioData();
-//   $u = new usuario();
+}
 
 
 
-// $u->setNombre("hoy");
-// $u->setTelefono(67676767);
-// $u->setCorreo("mio");
-// $u->setPassword(9);
-// $u->setTipoid(6);
 
-//  echo $data->insertarusuario($u);
-
-
-  ?>
+?>

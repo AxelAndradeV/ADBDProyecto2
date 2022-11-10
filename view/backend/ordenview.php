@@ -4,14 +4,12 @@
 
   $ordenBusiness = new OrdenBusiness();
   $ordenes = $ordenBusiness->getAllTBOrdenes();
-  $detalles = $ordenBusiness->getAllTBDetalles(11);
-
-  //echo json_encode($detalles);
-  //print_r($detalles);
-  //print_r($ordenes);
-
+  
 ?>
 
+<?php 
+   include 'template/sesion.php';
+  ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -52,10 +50,6 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
-  <!-- Preloader -->
- <!--  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-  </div> -->
 
   <!-- Navbar -->
   <?php include 'template/header.php' ?>
@@ -79,7 +73,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
       
         <div class="info d-flex justify-content-between">
           <i class="fas fa-user text-light mr-3" style="font-size: 23px;"></i>
-          <a href="#" class="d-block">Usuario</a>
+          <a href="#" class="d-block"><?php echo $usuario ?></a>
         </div>
       </div>
 
@@ -137,14 +131,14 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                 <a href="usuarioview.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <i class="fas fa-users-cog nav-icon"></i>
-                  <p>Agregar Usuario</p>
+                  <p>Gestionar</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="usuarioview.php" class="nav-link">
+                <a href="tipousuarioview.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <i class="fas fa-users-cog nav-icon"></i>
-                  <p>Ver Tipos</p>
+                  <p>Tipos</p>
                 </a>
               </li>
             </ul>
@@ -162,7 +156,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
           
 
          <li class="nav-item ">
-            <a href="./index.html" class="nav-link">
+            <a href="../../business/usuarioaction.php?cerrarSesion=true" class="nav-link">
                <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                 Cerrar sesión
@@ -471,6 +465,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
       "info": true,
       "autoWidth": false,
       "responsive": true,
+       "order": [[7, 'desc']]
     });
   });
 </script>
@@ -544,52 +539,6 @@ $(".tabla-ordenes tbody").on("click", "button.btnEliminarOrden", function(){
 
 });
 
-
-$(".nuevaImagen").change(function(){
-
-  var imagen = this.files[0];
-  
-  /*=============================================
-    VALIDAMOS EL FORMATO DE LA IMAGEN SEA JPG O PNG
-    =============================================*/
-
-    if(imagen["type"] != "image/jpeg" && imagen["type"] != "image/png"){
-
-      $(".nuevaImagen").val("");
-
-       swal({
-          title: "Error al subir la imagen",
-          text: "¡La imagen debe estar en formato JPG o PNG!",
-          type: "error",
-          confirmButtonText: "¡Cerrar!"
-        });
-
-    }else if(imagen["size"] > 2000000){
-
-      $(".nuevaImagen").val("");
-
-       swal({
-          title: "Error al subir la imagen",
-          text: "¡La imagen no debe pesar más de 2MB!",
-          type: "error",
-          confirmButtonText: "¡Cerrar!"
-        });
-
-    }else{
-
-      var datosImagen = new FileReader;
-      datosImagen.readAsDataURL(imagen);
-
-      $(datosImagen).on("load", function(event){
-
-        var rutaImagen = event.target.result;
-
-        $(".previsualizar").attr("src", rutaImagen);
-
-      })
-
-    }
-})
 </script>
 
 

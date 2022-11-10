@@ -13,6 +13,12 @@
     <title>Carrito</title>
     <link rel="stylesheet" href="../backend/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
 <link rel="stylesheet" href="../backend/plugins/toastr/toastr.min.css">
+
+    <style>
+        #text{
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <?php include 'template/header.php' ?>
@@ -22,17 +28,7 @@
       
         <br>
         <h1 style="font-family:Amatic SC, sans-serif;font-weight: 600;">Lista de carrito</h1>
-        
-            
-            <?php
-                        // if (isset($_GET['mensaje'])) {
-                        //     echo '<div class="alert alert-success" role="alert">';
-                        //     echo $_GET['mensaje'];
-                        //     echo '</div>';
-                           
-                        // } 
-            ?>
-           
+    
        
         
        
@@ -68,7 +64,7 @@
                                     </form>
                                 </td>
                             
-                                </tr>;';
+                                </tr>';
                             $total+=$producto['productoprecio']*$producto['productocantidad'];
                         }
 
@@ -110,7 +106,7 @@
                     echo ' <div class="alert alert-success" role="alert">
                                 No hay productos :c
                             </div>';
-                    echo '';
+                        
                     }
                     
                 ?>
@@ -121,11 +117,7 @@
             </tbody>
             
         </table>
-         <tr>
-    
-                </tr>
-    <td></td>
-           
+   
         
     </div>
 
@@ -145,7 +137,8 @@
                timer: 3000,
                timerProgressBar: true
              });";
-          if($_GET['mensaje']==1){ //insertar
+
+          if(isset($_GET['mensaje'])==1){ //insertar
             echo "Toast.fire({
                  icon: 'success',
 

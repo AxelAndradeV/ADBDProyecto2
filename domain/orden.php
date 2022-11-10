@@ -9,6 +9,7 @@ class Orden{
 	private $fecha;
 	private $total;
 	private $estado;
+	
 
 	
 	function setIdOrden($id){
@@ -88,6 +89,7 @@ class Orden{
 	{
 		return $this->estado;
 	}
+
 }
 
 

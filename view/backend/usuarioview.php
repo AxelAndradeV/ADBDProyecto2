@@ -1,19 +1,23 @@
 <?php  
 
-    include '../../business/categoriabusiness.php';
-    include '../../business/usuarioBusiness.php';
+    include '../../business/usuariobusiness.php';
+    include '../../business/tipousuariobusiness.php';
 
    
 
-    $categoriaBusiness = new CategoriaBusiness();
-    $categorias = $categoriaBusiness->getAllTBCategorias();
     $usuarioBusiness = new UsuarioBusiness();
     $usuarios = $usuarioBusiness->getAllTBusuarios();
+    $tipousuarioBusiness = new TipoUsuarioBusiness();
+    $tipousuarios = $tipousuarioBusiness->getAllTBTipoUsuarios();
    // echo __DIR__;
    // var_dump($categorias);
 
 
 ?>
+
+<?php 
+   include 'template/sesion.php';
+  ?>
 
 
 <!DOCTYPE html>
@@ -55,6 +59,9 @@
   <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <link rel="stylesheet" href="plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
+  <style>
+    .hidetext { -webkit-text-security: disc; /* Default */ }
+  </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -86,7 +93,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
       
         <div class="info d-flex justify-content-between">
           <i class="fas fa-user text-light mr-3" style="font-size: 23px;"></i>
-          <a href="#" class="d-block">Usuario</a>
+          <a href="#" class="d-block"><?php echo $usuario ?></a>
         </div>
       </div>
 
@@ -123,7 +130,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
           </li>
 
            <li class="nav-item ">
-            <a href="categoriaview.php" class="nav-link active">
+            <a href="categoriaview.php" class="nav-link">
               <i class="nav-icon fas fa-list"></i>
               <p>
                 Categorías
@@ -132,7 +139,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
           </li>
          
           <li class="nav-item">
-            <a href=".usuarioview.php" class="nav-link">
+            <a href="usuarioview.php" class="nav-link  active">
                <i class="nav-icon fas fa-users"></i>
               <p>
                 Usuarios
@@ -144,11 +151,11 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                 <a href="usuarioview.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <i class="fas fa-users-cog nav-icon"></i>
-                  <p>Agregar nuevo usuario</p>
+                  <p>Gestionar</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="usuarioview.php" class="nav-link">
+                <a href="tipousuarioview.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <i class="fas fa-users-cog nav-icon"></i>
                   <p>Ver Tipos</p>
@@ -209,7 +216,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
               <div class="card-header jus">
                 <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarUsuario">
 
-                    Agregar Usuario Nuevo
+                    Agregar usuario
 
                   </button>
               </div>
@@ -237,9 +244,14 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
                          
                           echo '<td>'.$usuario['usuariocorreo'].'</td>';
                           
-                          echo '<td>'.$usuario['usuariopassword'].'</td>';
-                         
-                          echo '<td>'.$usuario['tipoid'].'</td>';
+                          echo '<td class="hidetext">'.$usuario['usuariopassword'].'</td>';
+                          echo '<td>';
+                          if($usuario['tipoid'] == 1){
+                            echo '<span class="badge badge-light">Administrador</span>';
+                          }else{
+                            echo '<span class="badge badge-light">Empleado</span>';
+                          }
+                          echo '</td>';
                           echo '<td>';
                           echo "<div class='btn-group'><button class='btn btn-warning btnEditarUsuario' usuarioid='".$usuario["usuarioid"]."' usuarionombre='".$usuario['usuarionombre']."' usuariotelefono='".$usuario['usuariotelefono']."'  usuariocorreo='".$usuario["usuariocorreo"]."' usuariopassword='".$usuario["usuariopassword"]."' tipoid='".$usuario["tipoid"]."' data-toggle='modal' data-target='#modalEditarUsuario'><i class='fa fa-pencil-alt'></i></button><button class='btn btn-danger btnEliminarUsuario' usuarioid='".$usuario["usuarioid"]."' usuariotelefono='".$usuario["usuariotelefono"]."' usuariocorreo='".$usuario["usuariocorreo"]."' usuariopassword='".$usuario["usuariopassword"]."' tipoid='".$usuario["tipoid"]."' ><i class='fa fa-times'></i></button></div>";
                           echo '</td>';
@@ -276,7 +288,7 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
     <div class="modal-content">
 
         <div class="modal-header">
-          <h4 class="modal-title">Agregar Usuario Nuevo</h4>
+          <h4 class="modal-title">Agregar usuario</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -308,45 +320,43 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
               <div class="form-group">
                 <label >Password:</label>
                 <input type="text" class="form-control" name="usuariopassword" id="usuariopassword" placeholder="Ingrese contraseña">
-               
+                      </div>
+
                 <label>Tipo de Usuario: </label>
-              <select class="tipoid" name="tipoid" id="tipoid">
+              <select class="tipoid form-control" name="tipoid" id="tipoid" >
 
                 <option selected>Seleccione el tipo de usuario</option>
               
-                  <?php foreach($usuarios as $usuario){
+                  <?php foreach($tipousuarios as $tipousuario){
 
-                    echo ' <option value="'.$usuario['tipoid'].'" class="badge badge-pill badge-warning" style="font-size: 15px;">'.$usuario['tipodescripcion'].'</option>';
+                    echo ' <option value="'.$tipousuario['tipoid'].'" class="badge badge-pill badge-warning" style="font-size: 15px;">'.$tipousuario['tipodescripcion'].'</option>';
                   }?>
 
-
-
-               
-              </select>
-
+            </select>
+            <br><br>
 
              
               
              <center><button type="submit" name="insertar" class="btn btn-primary">Insertar</button></center> 
             </form>
 
+        </div>
+
+      </div>
+
     </div>
-
-  </div>
-
-</div>
   </div>
 
 </div>
 
 <div id="modalEditarUsuario" class="modal fade" role="dialog">
-  
-  <div class="modal-dialog">
 
-    <div class="modal-content">
+    <div class="modal-dialog">
+
+      <div class="modal-content">
 
         <div class="modal-header">
-          <h4 class="modal-title">Editar Usuario</h4>
+          <h4 class="modal-title">Editar usuario</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -356,68 +366,67 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 
           <div class="box-body">
 
-            <form method="POST" action="../../business/usuarioaction.php"  enctype="multipart/form-data">
-              
+            <form method="POST" action="../../business/usuarioaction.php" enctype="multipart/form-data">
+
               <div class="form-group">
                 <input type="hidden" name="usuarioid" id="usuarioid">
-                
+
               </div>
 
               <div class="form-group">
                 <label >Nombre:</label>
-                <input type="text" class="form-control" name="usuarionombre" id="usuarionombre" placeholder="Ingrese el nombre">
+                <input type="text" class="form-control" name="usuarionombre" id="usuarionombre" placeholder="Ingrese un nombre">
                
               </div>
               
-                      
               <div class="form-group">
                 <label >Telefono:</label>
-                <input type="text" class="form-control" name="usuariotelefono" id="usuariotelefono" placeholder="Ingrese el telefono">
+                <input type="text" class="form-control" name="usuariotelefono" id="usuariotelefono" placeholder="Ingrese un telefono">
                
               </div>
-              
-              
               <div class="form-group">
                 <label >Correo:</label>
-                <input type="text" class="form-control" name="usuariocorreo" id="usuariocorreo" placeholder="Ingrese el correo">
+                <input type="text" class="form-control" name="usuariocorreo" id="usuariocorreo" placeholder="Ingrese un correo">
                
               </div>
-              
-              
               <div class="form-group">
                 <label >Password:</label>
-                <input type="text" class="form-control" name="usuariopassword" id="usuariopassword" placeholder="Ingrese una contraseña">
-               
-              </div>
-              
-              
-              <label>Tipo Usuario: </label>
-              <select class="tipoid" name="tipoid" id="tipoid">
+                
+                
+                <input type="password" class="form-control" name="usuariopassword" id="usuariopassword" placeholder="Ingrese contraseña">
+                <div class="form-group">
+                   <label class="">
+                      <input type="checkbox" id="mostrarPassword" >  Mostrar contraseña
+                    </label>
 
-                <option selected>Seleccione el tipo de Usuario</option>
-              
-                  <?php foreach($usuarios as $usuario){
+                </div>
+                      </div>
 
-                    echo ' <option value="'.$usuario['tipoid'].'" class="badge badge-pill badge-warning" style="font-size: 15px;">'.$usuario['tipodescripcion'].'</option>';
+              <label>Tipo de usuario: </label>
+              <select class="tipoid form-control" name="tipoid" id="tipoid">
+
+                <option selected>Seleccione el tipo de usuario</option>
+              
+                  <?php foreach($tipousuarios as $tipousuario){
+
+                    echo ' <option value="'.$tipousuario['tipoid'].'" class="badge badge-pill badge-warning" style="font-size: 15px;">'.$tipousuario['tipodescripcion'].'</option>';
                   }?>
 
-               
-              </select>
-              
-
-           
-              
-             <center><button type="submit" name="actualizar" class="btn btn-primary">Actualizar</button></center> 
+            </select>
+            <br>
+              <center><button type="submit" name="actualizar" class="btn btn-primary">Actualizar</button></center>
             </form>
 
+          </div>
+
+        </div>
+
+      </div>
     </div>
 
   </div>
 
-</div>
-  </div>
 
-</div>
 
 
 
@@ -580,7 +589,14 @@ $(".tabla-usuarios tbody").on("click", "button.btnEliminarUsuario", function(){
 });
 
 
+$('#modalEditarUsuario #mostrarPassword').click(function(){
+
+  $(this).is(':checked') ? $('#modalEditarUsuario #usuariopassword').attr('type', 'text') : $('#modalEditarUsuario #usuariopassword').attr('type', 'password');
+});
+
+
 
 </script>
 </body>
 </html>
+

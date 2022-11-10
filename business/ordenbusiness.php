@@ -25,8 +25,12 @@ class OrdenBusiness{
 		return $this->ordenData->insertarTBDetalle($detalle);	
 	}
 
-	public function modificarOrden($ordenid,$ordenestado){
-		return $this->ordenData->modificarOrden($ordenid,$ordenestado);		
+	public function modificarOrden($ordenid,$ordenestado,$usuarioid ){
+		return $this->ordenData->modificarOrden($ordenid,$ordenestado,$usuarioid );		
+	}
+
+	public function modificarNotificacion(){
+		return $this->ordenData->modificarNotificacion();
 	}
 
 	public function eliminarOrden($id){
